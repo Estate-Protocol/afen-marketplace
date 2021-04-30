@@ -1,15 +1,53 @@
 import Container from "../components/Container";
+import Title from "../components/Title";
+import SubTitle from "../components/SubTitle";
+import Flex from "../components/Flex";
+import Card from "../components/Card";
 
 export default function Home() {
+  const cards = [
+    {
+      name: "Curtis Flores",
+    },
+    {
+      name: "Lina Poole",
+    },
+    {
+      name: "Jean Daniel",
+    },
+    {
+      name: "Winifred Blake",
+    },
+    {
+      name: "Peter Burton",
+    },
+    {
+      name: "Roy Reed",
+    },
+  ];
+
   return (
-    <Container style="flex flex-1 flex-col justify-center align-center h-screen">
-      <div className="font-mono tracking-wide">
-        <h1 className="text-4xl text-center">AFEN</h1>
-        <p className="w-3/4 md:w-1/3 text-sm mx-auto text-center my-4">
-          AFEN has the objective of combining blockchain’s immutable data
-          structure and the backing of government bodies to provide legitimacy
-          to products.
-        </p>
+    <Container style="mt-20">
+      <div className="mb-10">
+        <Title>Verified Listings</Title>
+        <SubTitle>Ut ipsum enim mollit veniam proident.</SubTitle>
+
+        <Flex style="mt-5">
+          {cards.map((card, index) => (
+            <Card style={(index > 0 && "mx-4") || "mr-4"}>{""}</Card>
+          ))}
+        </Flex>
+      </div>
+
+      <div className="mt-20 mb-10">
+        <Title>Artist Listings</Title>
+        <SubTitle>Ut ipsum enim mollit veniam proident.</SubTitle>
+
+        <Flex style="mt-5">
+          {cards.map((card, index) => (
+            <Card style={(index > 0 && "mx-4") || "mr-4"}>{""}</Card>
+          ))}
+        </Flex>
       </div>
     </Container>
   );

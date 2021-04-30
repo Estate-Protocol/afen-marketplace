@@ -18,7 +18,7 @@ export default function Layout(props) {
       {/* TODO: isAuthenticated */}
       <Header />
 
-      <div className="px-1 flex flex-col justify-center align-middle h-screen h-min-screen dark:bg-afen-blue">
+      <div className="px-1 flex flex-col justify-center align-middle min-h-screen dark:bg-afen-blue">
         {/* Body */}
         <main className="h-min-screen font-semibold">
           <div>{props.children}</div>
