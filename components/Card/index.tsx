@@ -6,11 +6,13 @@ import { BaseComponent } from "../../types/baseComponent";
 
 export default function index({ children, style }: BaseComponent) {
   return (
-    <div className={`${style}`}>
-      <div
-        className={`rounded-md min-w-full w-80 min-h-96 h-96 border border-almond`}
-      >
-        {children}
+    <div className="w-80">
+      <div className="group w-80 min-w-full">
+        <div
+          className={`rounded-md min-h-96 h-96 border-2 group-hover:border-4 cursor-pointer border-afen-yellow dark:bg-blue-50 dark:text-black ${style}`}
+        >
+          {children}
+        </div>
       </div>
     </div>
   );

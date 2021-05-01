@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import Link from "../Link";
 import Button from "../Button";
 
 export default function Header() {
@@ -13,9 +13,21 @@ export default function Header() {
       </Link>
 
       <div className="ml-auto">
-        <Button>
-          <Link href="/create">Create</Link>
-        </Button>
+        <Link href="/">
+          <button className="px-5 hover:text-afen-yellow font-semibold text-sm">
+            Browse
+          </button>
+        </Link>
+        <Link href="/create">
+          <button className="px-5 hover:text-afen-yellow font-semibold text-sm">
+            Link Wallet
+          </button>
+        </Link>
+        <Link href="/create">
+          <button className="px-5 hover:text-afen-yellow font-semibold text-sm">
+            Create
+          </button>
+        </Link>
       </div>
     </div>
   );

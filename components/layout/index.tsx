@@ -7,7 +7,7 @@ export default function Layout(props) {
     <div>
       <Head>
         {/* TODO: Page provider */}
-        <title>AFEN</title>
+        <title>AFEN Art Marketplace</title>
         <meta
           name="description"
           content="AFEN has the objective of combining blockchain’s immutable data structure and the backing of government bodies to provide legitimacy to products"
@@ -20,7 +20,7 @@ export default function Layout(props) {
 
       <div className="px-1 flex flex-col justify-center align-middle min-h-screen dark:bg-afen-blue">
         {/* Body */}
-        <main className="h-min-screen font-semibold">
+        <main className="h-min-screen font-medium tracking-tight">
           <div>{props.children}</div>
         </main>
         <Footer />
