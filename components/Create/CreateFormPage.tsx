@@ -60,12 +60,12 @@ export default class CreateForm extends Component<IProps, IState> {
       <Container style="mt-10 md:mt-20 flex flex-wrap h-full">
         <div className="lg:w-2/3 lg:pr-10">
           <Title>Create NFT</Title>
-          <SubTitle>Create, sell, resell afican art pieces.</SubTitle>
+          <SubTitle>Mint your art</SubTitle>
           <div className="mt-10">
             <div className="md:grid md:grid-cols-3 md:gap-6">
               <div className="md:col-span-1">
                 <div className="px-4 sm:px-0">
-                  <h3 className="text-lg font-medium leading-6">Artt</h3>
+                  <h3 className="text-lg font-medium leading-6">Art</h3>
                   <p className="mt-1 text-sm text-gray-600">
                     Upload the art you would want to list.
                   </p>
