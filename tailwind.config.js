@@ -7,6 +7,7 @@ module.exports = {
         "afen-blue": "#0B0C21",
         "afen-yellow": "#dbca5f",
         almond: "#FFECD1",
+        "rich-black": "#0A0B1F",
       },
     },
   },
