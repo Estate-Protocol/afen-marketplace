@@ -1,13 +1,17 @@
 import Container from "../components/Container";
+import Link from "next/link";
 import Title from "../components/Title";
 import SubTitle from "../components/SubTitle";
 import Text from "../components/Text";
 import Flex from "../components/Flex";
-import Card, { CardText } from "../components/Card";
+import Card, { CardMedia, CardText } from "../components/Card";
 import arts from "../data";
+import { useRouter } from "next/router";
 // import { Listing } from "../components/Browse";
 
 export default function Home() {
+  const router = useRouter();
+
   return (
     <Container style="mt-20">
       {/* <Listing
@@ -25,19 +29,21 @@ export default function Home() {
             (art, index) =>
               art.verified === "government" && (
                 <Card
-                  key={index}
                   style={`${(index > 0 && "mx-4") || "mr-4"} relative`}
+                  key={index}
+                  onClick={() => router.push(`/token/${index}`)}
                 >
-                  <CardText style="flex justify-between items-end">
-                    <Text>
-                      <Text style="text-xl">{art.name}</Text>
+                  <CardMedia src={art.image.src} alt={art.image.src} />
+                  <CardText style="flex justify-between items-end bg-white dark:bg-rich-black dark:text-white">
+                    <div>
+                      <Text style="text-xl group-hover:text-afen-yellow">
+                        {art.name}
+                      </Text>
                       <Text style="text-sm text-gray-500">
                         {art.governmentAuthority}
                       </Text>
-                    </Text>
-                    <Text style="text-lg group-hover:text-afen-yellow">
-                      {art.price} ETH
-                    </Text>
+                    </div>
+                    <Text style="text-lg">{art.price} ETH</Text>
                   </CardText>
                 </Card>
               )
@@ -54,19 +60,20 @@ export default function Home() {
             (art, index) =>
               art.verified === "afen" && (
                 <Card
-                  key={index}
                   style={`${(index > 0 && "mx-4") || "mr-4"} relative`}
+                  key={index}
                 >
-                  <CardText style="flex justify-between items-end">
-                    <Text>
-                      <Text style="text-xl">{art.name}</Text>
+                  <CardMedia src={art.image.src} alt={art.image.src} />
+                  <CardText style="flex justify-between items-end bg-white dark:bg-rich-black dark:text-white">
+                    <div>
+                      <Text style="text-xl group-hover:text-afen-yellow">
+                        {art.name}
+                      </Text>
                       <Text style="text-sm text-gray-500">
                         {art.governmentAuthority}
                       </Text>
-                    </Text>
-                    <Text style="text-lg group-hover:text-afen-yellow">
-                      {art.price} ETH
-                    </Text>
+                    </div>
+                    <Text style="text-lg">{art.price} ETH</Text>
                   </CardText>
                 </Card>
               )
@@ -82,8 +89,22 @@ export default function Home() {
           {arts.map(
             (art, index) =>
               !art.verified && (
-                <Card key={index} style={`${(index > 0 && "mx-4") || "mr-4"}`}>
-                  {""}
+                <Card
+                  style={`${(index > 0 && "mx-4") || "mr-4"} relative`}
+                  key={index}
+                >
+                  <CardMedia src={art.image.src} alt={art.image.src} />
+                  <CardText style="flex justify-between items-end bg-white dark:bg-rich-black dark:text-white">
+                    <div>
+                      <Text style="text-xl group-hover:text-afen-yellow">
+                        {art.name}
+                      </Text>
+                      <Text style="text-sm text-gray-500">
+                        {art.governmentAuthority}
+                      </Text>
+                    </div>
+                    <Text style="text-lg">{art.price} ETH</Text>
+                  </CardText>
                 </Card>
               )
           )}

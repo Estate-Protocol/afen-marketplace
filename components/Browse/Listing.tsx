@@ -24,13 +24,12 @@ export default function Listing({ subtitle, title, listing }: Listing) {
             style={`${(index > 0 && "mx-4") || "mr-4"} relative`}
           >
             <CardText style="flex justify-between items-end">
-              <p>{item}</p>
-              <Text>
+              <div>
                 <Text style="text-xl">{item.name}</Text>
                 <Text style="text-sm text-gray-500">
                   {item.governmentAuthority}
                 </Text>
-              </Text>
+              </div>
               <Text style="text-lg group-hover:text-afen-yellow">
                 {item.price} ETH
               </Text>
