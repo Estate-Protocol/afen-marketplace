@@ -31,7 +31,7 @@ export default function Home() {
                 <Card
                   style={`${(index > 0 && "mx-4") || "mr-4"} relative`}
                   key={index}
-                  onClick={() => router.push(`/token/${index}`)}
+                  onClick={() => router.push(`/token/${art.id}`)}
                 >
                   <CardMedia src={art.image.src} alt={art.image.src} />
                   <CardText style="flex justify-between items-end bg-white dark:bg-rich-black dark:text-white">
@@ -62,6 +62,7 @@ export default function Home() {
                 <Card
                   style={`${(index > 0 && "mx-4") || "mr-4"} relative`}
                   key={index}
+                  onClick={() => router.push(`/token/${art.id}`)}
                 >
                   <CardMedia src={art.image.src} alt={art.image.src} />
                   <CardText style="flex justify-between items-end bg-white dark:bg-rich-black dark:text-white">
@@ -92,6 +93,7 @@ export default function Home() {
                 <Card
                   style={`${(index > 0 && "mx-4") || "mr-4"} relative`}
                   key={index}
+                  onClick={() => router.push(`/token/${art.id}`)}
                 >
                   <CardMedia src={art.image.src} alt={art.image.src} />
                   <CardText style="flex justify-between items-end bg-white dark:bg-rich-black dark:text-white">

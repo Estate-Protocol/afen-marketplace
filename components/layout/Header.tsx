@@ -17,8 +17,18 @@ export default function Header() {
             Browse
           </button>
         </Link>
-        <Link href="/create">
+        <Link href="/verified/government">
           <button className="px-5 hover:text-afen-yellow font-semibold text-sm">
+            Government Verified
+          </button>
+        </Link>
+        <Link href="/african-artist">
+          <button className="px-5 hover:text-afen-yellow font-semibold text-sm">
+            African Artist
+          </button>
+        </Link>
+        <Link href="/create">
+          <button className="ml-5 px-6 py-2 bg-almond text-afen-blue rounded-xl hover:text-afen-yellow font-semibold text-sm">
             Create
           </button>
         </Link>

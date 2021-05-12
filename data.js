@@ -1,5 +1,6 @@
 export default [
   {
+    id: "69126c24-588e-5aa4-8698-bb1ac5cd6e7f",
     name: "Lina Hampton",
     verified: "afen",
     description: "",
@@ -29,6 +30,7 @@ export default [
     ],
   },
   {
+    id: "f0d75833-37fa-5f55-b4ee-3ac13126fe95",
     name: "Bruce Mathis",
     verified: "afen",
     description: "",
@@ -58,6 +60,7 @@ export default [
     ],
   },
   {
+    id: "583016f7-21dd-58f1-af9e-2234e878588f",
     name: "Sally Williamson",
     verified: "afen",
     description: "",
@@ -87,6 +90,7 @@ export default [
     ],
   },
   {
+    id: "53135294-a208-5a29-9bc3-ff95535c0122",
     name: "Isaac Cole",
     verified: "afen",
     description: "",
@@ -116,6 +120,7 @@ export default [
     ],
   },
   {
+    id: "881b77a1-eb10-5951-8a33-c9ad1c2c69f0",
     name: "Nathaniel Casey",
     verified: "afen",
     description: "",
@@ -145,6 +150,7 @@ export default [
     ],
   },
   {
+    id: "b5c261bd-d145-5749-a81d-083e1c64efa2",
     name: "Fred Davidson",
     verified: "afen",
     description: "",
@@ -174,6 +180,7 @@ export default [
     ],
   },
   {
+    id: "b41bb00f-13e3-5c21-9a07-8faed005d492",
     name: "May Webster",
     verified: "government",
     description: "",
@@ -203,6 +210,7 @@ export default [
     ],
   },
   {
+    id: "37437970-5895-5d6e-b236-c718c2d72d98",
     name: "Brian Wise",
     verified: "government",
     description: "",
@@ -232,6 +240,7 @@ export default [
     ],
   },
   {
+    id: "1e8d1680-e0d9-5706-b55d-08376cbd59ce",
     name: "Tony Paul",
     verified: "government",
     description: "",
@@ -261,6 +270,7 @@ export default [
     ],
   },
   {
+    id: "58e1c223-8afc-52c8-a7dd-45ab76baa4ef",
     name: "Tom McCoy",
     verified: "government",
     description: "",
@@ -290,6 +300,7 @@ export default [
     ],
   },
   {
+    id: "7711bbb1-71f4-523e-8795-f18a5fe8fbab",
     name: "Jacob Allison",
     verified: "government",
     description: "",
@@ -319,6 +330,7 @@ export default [
     ],
   },
   {
+    id: "e325ef2a-b154-5b5b-861a-d18ab4f68bf8",
     name: "Louise Riley",
     verified: "government",
     description: "",
@@ -348,6 +360,7 @@ export default [
     ],
   },
   {
+    id: "4cdbf4b7-8ada-51e4-b299-088d1784ae36",
     name: "Martha Weaver",
     verified: null,
     description: "",
@@ -377,6 +390,7 @@ export default [
     ],
   },
   {
+    id: "a159c300-a14f-54a8-8290-132996ce2057",
     name: "Madge Lamb",
     verified: null,
     description: "",
@@ -406,6 +420,7 @@ export default [
     ],
   },
   {
+    id: "56354d1b-0f3e-50e2-aa19-6e4eaa96ab44",
     name: "Martha Mathis",
     verified: null,
     description: "basis except",
@@ -434,6 +449,7 @@ export default [
     ],
   },
   {
+    id: "73c38137-0121-5068-8f43-75849be9e7b4",
     name: "David Jefferson",
     description: "",
     hightestBid: 2.9,
@@ -461,6 +477,7 @@ export default [
     ],
   },
   {
+    id: "31a84810-34c0-50fc-962c-9594b2a10103",
     name: "Derrick Robinson",
     description: "",
     hightestBid: 2.9,

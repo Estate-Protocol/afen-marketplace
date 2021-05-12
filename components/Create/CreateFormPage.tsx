@@ -4,6 +4,7 @@ import Title from "../Title";
 import SubTitle from "../SubTitle";
 import Text from "../Text";
 import Card, { CardText } from "../Card";
+import { useRouter } from "next/router";
 
 interface IProps {
   verified?: boolean;
@@ -293,7 +294,10 @@ export default class CreateForm extends Component<IProps, IState> {
                       </div>
                     </div>
                   </div>
-                  <button className="px-6 py-3 rounded-2xl bg-white dark:text-black hover:text-afen-yellow font-semibold mt-5">
+                  <button
+                    className="px-6 py-3 rounded-2xl bg-white dark:text-black hover:text-afen-yellow font-semibold mt-5"
+                    // onClick={() => router.push("/wallet/connect")}
+                  >
                     Create
                   </button>
                 </form>
