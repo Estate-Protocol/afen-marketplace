@@ -1,7 +1,16 @@
 import Image from "next/image";
 import Link from "../Link";
+import { ethers } from "ethers";
 
 export default function Header() {
+  // Connect to Metamask using Ethers.js 5.0
+  const metamask_connect = async () => {
+    if(window.ethereum.isConnected()) {
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    } else {
+      alert('Please install Metamask')
+    }
+  }
   return (
     <div className="bg-white dark:bg-afen-blue px-4 md:px-10 lg:px-16 py-4 mx-auto border-b flex items-center">
       <Link href="/">
@@ -32,6 +41,7 @@ export default function Header() {
             Create
           </button>
         </Link>
+        <button onClick={metamask_connect}>Metamask</button>
       </div>
     </div>
   );
