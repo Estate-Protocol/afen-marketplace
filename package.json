@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "ethers": "^5.1.4",
     "next": "10.2.0",
     "next-themes": "^0.0.14",
     "react": "17.0.2",
