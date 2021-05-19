@@ -75,7 +75,7 @@ export default class CreateForm extends Component<IProps, IState> {
               <div className="mt-5 md:mt-0 md:col-span-2 mb-0 sm:mb-10">
                 <form>
                   <div className="shadow border border-gray-100 border-opacity-20 sm:rounded-md sm:overflow-hidden">
-                    <div className="px-4 py-5 bg-rich-black space-y-6 sm:p-6">
+                    <div className="px-4 py-5 bg-afen-blue-light space-y-6 sm:p-6">
                       <div>
                         <label className="block text-sm font-medium text-gray-300 mb-2">
                           Upload file
@@ -141,7 +141,7 @@ export default class CreateForm extends Component<IProps, IState> {
               <div className="mt-5 md:mt-0 md:col-span-2  mb-0 sm:mb-10">
                 <form>
                   <div className="shadow overflow-hidden border border-gray-100 border-opacity-20 sm:rounded-md">
-                    <div className="px-4 py-5 bg-rich-black sm:p-6">
+                    <div className="px-4 py-5 bg-afen-blue-light sm:p-6">
                       <div className="grid grid-cols-6 gap-6">
                         <div className="col-span-full">
                           <div
@@ -251,7 +251,7 @@ export default class CreateForm extends Component<IProps, IState> {
               <div className="mt-5 md:mt-0 md:col-span-2 mb-10">
                 <form>
                   <div className="shadow overflow-hidden border border-gray-100 border-opacity-20 sm:rounded-md">
-                    <div className="px-4 py-5 bg-rich-black space-y-6 sm:p-6">
+                    <div className="px-4 py-5 bg-afen-blue-light space-y-6 sm:p-6">
                       <div className="col-span-full">
                         <label
                           htmlFor="title"
@@ -312,10 +312,10 @@ export default class CreateForm extends Component<IProps, IState> {
                 <Text style="text-xl">{this.state.title}</Text>
                 {/* <Text style="text-sm text-gray-500">Authority/Owner</Text> */}
               </div>
-              <div>
+              <div className="dark:text-white">
                 {(this.state.price !== 0 || this.state.minimmumBid !== 0) && (
                   <Text style="text-lg group-hover:text-afen-yellow text-right">
-                    {this.state?.price || this.state?.minimmumBid} ETH
+                    {this.state?.price || this.state?.minimmumBid} BNB
                   </Text>
                 )}
                 {(this.state.auction ||

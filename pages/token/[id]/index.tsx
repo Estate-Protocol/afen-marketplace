@@ -37,8 +37,8 @@ export default function Token() {
               A one of six-piece series reflecting on different aspects of the
               Covid-19 pandemic, from the less privileged to the high rates of
               daily deaths recorded causing an overwhelming panic and grief in
-              the world. This series is a campaign act in favor of the
-              voiceless and powerless.
+              the world. This series is a campaign act in favor of the voiceless
+              and powerless.
             </Text>
 
             <Text style="bg-almond px-4 py-2 mt-5 rounded-full text-center font-light overflow-hidden dark:text-black">
@@ -119,7 +119,7 @@ export default function Token() {
                 <button className="px-6 py-3 rounded-2xl bg-white dark:text-black font-semibold w-full">
                   Buy
                 </button>
-                <button className="px-6 py-3 rounded-2xl bg-blue-600 border-2 border-rich-black dark:text-white font-semibold w-full ml-2">
+                <button className="px-6 py-3 rounded-2xl bg-blue-600 border-2 border-afen-blue-light dark:text-white font-semibold w-full ml-2">
                   Place a bid
                 </button>
               </div>

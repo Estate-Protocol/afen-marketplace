@@ -4,10 +4,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "afen-blue": "#0B0C21",
+        "afen-blue": "#0A0C1F",
+        "afen-blue-light": "#0F122E",
+        "afen-blue-lighter": "#1E245C",
         "afen-yellow": "#dbca5f",
         almond: "#FFECD1",
-        "rich-black": "#0A0B1F",
+        "rich-black": "#05060F",
       },
     },
   },
