@@ -4,6 +4,7 @@ import Button from "../Button";
 import React, { useEffect, useState } from "react";
 import UserDropdownMenu from "../UserDropdownMenu";
 import { ethers } from "ethers";
+import { navigationLinks } from "../../constants/links";
 
 export default function Header() {
   const [accounts, setAccounts] = useState<string[] | null>(null);
@@ -60,20 +61,11 @@ export default function Header() {
       </Link>
 
       <div className="ml-auto">
-        <Link href="/">
-          <Button plain>Browse</Button>
-        </Link>
-        <Link href="/verified/government">
-          <Button plain>Government Verified</Button>
-        </Link>
-        <Link href="/african-artist">
-          <Button plain>African Artist</Button>
-        </Link>
-        <Link href="/create">
-          <Button type="primary" style="mx-3">
-            Create
-          </Button>
-        </Link>
+        {navigationLinks.map((link) => (
+          <Link href={link.href}>
+            <Button plain>{link.label}</Button>
+          </Link>
+        ))}
         {accounts ? (
           <UserDropdownMenu data={{ account: accounts[0], balance }} />
         ) : (
@@ -84,6 +76,11 @@ export default function Header() {
             Connect Wallet
           </Button>
         )}
+        <Link href="/create">
+          <Button type="primary" style="mx-3">
+            Create
+          </Button>
+        </Link>
       </div>
     </div>
   );

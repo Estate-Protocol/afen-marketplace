@@ -8,12 +8,8 @@ export const navigationLinks = [
     href: "/verified/government",
   },
   {
-    label: "Reports",
-    href: "/african-artist",
-  },
-  {
-    label: "Create",
-    href: "/create",
+    label: "Get Started",
+    href: "/",
   },
 ];
 
