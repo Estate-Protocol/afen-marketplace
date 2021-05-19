@@ -23,7 +23,7 @@ export default function Government() {
               onClick={() => router.push(`/token/${art.id}`)}
             >
               <CardMedia src={art.image.src} alt={art.image.src} />
-              <CardText style="flex justify-between items-end bg-white dark:bg-rich-black dark:text-white">
+              <CardText style="flex justify-between items-end bg-white dark:bg-afen-blue-light dark:text-white">
                 <div>
                   <Text style="text-xl group-hover:text-afen-yellow">
                     {art.name}
