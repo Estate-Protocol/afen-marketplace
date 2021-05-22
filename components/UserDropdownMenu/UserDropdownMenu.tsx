@@ -27,7 +27,7 @@ export default function UserDropdownMenu({ data }: UserDropdownMenuProps) {
                 ${open ? "" : "text-opacity-90"}
             group bg-orange-700 px-3 inline-flex items-center text-base font-medium hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75`}
             >
-              <p>{data.account.substring(0, 2)}</p>
+              <p>{data.account?.substring(0, 2)}</p>
               <UserCircleIcon
                 className={`${
                   open ? "" : "text-opacity-70"
