@@ -1,39 +1,40 @@
 import Image from "next/image";
 import Link from "../Link";
 import Button from "../Button";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import UserDropdownMenu from "../UserDropdownMenu";
 import { ethers } from "ethers";
 import { navigationLinks } from "../../constants/links";
 
 export default function Header() {
   const [accounts, setAccounts] = useState<string[] | null>(null);
-  const [balance, setBalance] = useState("");
-
-  useEffect(() => {
-    fetchUser();
-  });
+  const [balance, setBalance] = useState("0.00");
 
   const fetchUser = async () => {
     try {
       // @ts-ignore
       if (window.ethereum.isConnected()) {
         await getAccounts();
-        await getBalance();
+      } else {
+        window.alert("Please install Metamask");
       }
     } catch (err) {
       // TODO: use notificationo
-      window.alert("Please install metamask");
+      window.alert("You need to allow MetaMask.");
     }
   };
 
   const getAccounts = async () => {
-    // TODO: make provider accessible across entire app
-    // @ts-ignore
-    const provider = new ethers.providers.Web3Provider(window?.ethereum);
-    const accounts = await provider.listAccounts();
+    await window.ethereum.enable();
 
-    return setAccounts(accounts);
+    // @ts-ignore
+    // const provider = new ethers.providers.Web3Provider(window?.ethereum);
+    const accounts = await window.ethereum.request({
+      method: "eth_requestAccounts",
+    });
+
+    setAccounts(accounts);
+    return await getBalance();
   };
 
   const getBalance = async () => {
@@ -66,7 +67,7 @@ export default function Header() {
             <Button plain>{link.label}</Button>
           </Link>
         ))}
-        {accounts ? (
+        {accounts?.length ? (
           <UserDropdownMenu data={{ account: accounts[0], balance }} />
         ) : (
           <Button
