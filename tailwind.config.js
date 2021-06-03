@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "afen-blue": "#0A0C1F",
+        "afen-blue": "#02010A",
         "afen-blue-light": "#0F122E",
         "afen-blue-lighter": "#1E245C",
         "afen-yellow": "#dbca5f",

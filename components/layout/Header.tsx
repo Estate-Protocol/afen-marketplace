@@ -1,8 +1,8 @@
 import Image from "next/image";
-import Link from "../Link";
-import Button from "../Button";
+import Link from "@/design-system/Link";
+import Button from "@/design-system/Button";
 import React, { useState } from "react";
-import UserDropdownMenu from "../UserDropdownMenu";
+import UserDropdownMenu from "@/design-system/UserDropdownMenu";
 import { ethers } from "ethers";
 import { navigationLinks } from "../../constants/links";
 
@@ -25,6 +25,7 @@ export default function Header() {
   };
 
   const getAccounts = async () => {
+    // @ts-ignore
     await window.ethereum.enable();
 
     // @ts-ignore
@@ -53,18 +54,18 @@ export default function Header() {
   };
 
   return (
-    <div className="bg-white dark:bg-afen-blue px-4 md:px-10 lg:px-16 py-4 mx-auto border-b flex items-center">
+    <div className="bg-white dark:bg-afen-blue px-4 md:px-10 lg:px-16 py-4 mx-auto border-b dark:border-gray-800 flex items-center">
       <Link href="/">
         <a className="flex items-center font-mono tracking-wide">
           <Image src="/logo.png" width="40" height="40" />
-          <p className="ml-2 font-weight-bold text-xl">AFEN</p>
+          <p className="ml-2 font-weight-bold text-xl text-white">AFEN</p>
         </a>
       </Link>
 
       <div className="ml-auto">
         {navigationLinks.map((link) => (
           <Link href={link.href}>
-            <Button plain>{link.label}</Button>
+            <Button type="plain">{link.label}</Button>
           </Link>
         ))}
         {accounts?.length ? (
@@ -72,7 +73,7 @@ export default function Header() {
         ) : (
           <Button
             onClick={connectWallet} // TODO: Handle no connection
-            type={"outlined"}
+            type={"secondary"}
           >
             Connect Wallet
           </Button>

@@ -4,10 +4,6 @@ export const navigationLinks = [
     href: "/",
   },
   {
-    label: "Government",
-    href: "/verified/government",
-  },
-  {
     label: "Get Started",
     href: "/",
   },
@@ -20,7 +16,7 @@ export const userLinks = [
   },
   {
     label: "Edit profile",
-    href: "/",
+    href: "/user/profile",
   },
   {
     label: "Reports",

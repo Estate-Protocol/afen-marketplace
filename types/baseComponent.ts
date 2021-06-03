@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 export interface BaseComponent {
-  children: ReactNode;
+  children?: ReactNode | Element[];
   style?: string;
-  onClick?()
+  onClick?: () => void;
 }

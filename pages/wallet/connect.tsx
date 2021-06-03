@@ -1,9 +1,6 @@
 import React from "react";
-import Container from "../../components/Container";
-import Title from "../../components/Title";
-import SubTitle from "../../components/SubTitle";
-import Text from "../../components/Text";
-import Link from "../../components/Link";
+import Container from "@/design-system/Container";
+import Text from "@/design-system/Text";
 
 export default function index() {
   return (

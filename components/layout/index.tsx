@@ -1,8 +1,9 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import Head from "next/head";
+import { BaseComponent } from "@/types/BaseComponent";
 
-export default function Layout(props) {
+export default function Layout(props: BaseComponent) {
   return (
     <div>
       <Head>

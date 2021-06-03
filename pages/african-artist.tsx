@@ -1,11 +1,11 @@
 import router from "next/router";
 import React from "react";
-import Card, { CardMedia, CardText } from "../components/Card";
-import Container from "../components/Container";
-import Flex from "../components/Flex";
-import SubTitle from "../components/SubTitle";
-import Title from "../components/Title";
-import Text from "../components/Text";
+import Card, { CardMedia, CardText } from "@/design-system/Card";
+import Container from "@/design-system/Container";
+import Flex from "@/design-system/Flex";
+import SubTitle from "@/design-system/SubTitle";
+import Title from "@/design-system/Title";
+import Text from "@/design-system/Text";
 import arts from "../data";
 
 export default function AfricanArtist() {
