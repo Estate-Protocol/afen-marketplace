@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import UserDropdownMenu from "@/design-system/UserDropdownMenu";
 import { ethers } from "ethers";
 import { navigationLinks } from "../../constants/links";
+// import { BsWallet } from "react-icons/bs";
 
 export default function Header() {
   const [accounts, setAccounts] = useState<string[] | null>(null);

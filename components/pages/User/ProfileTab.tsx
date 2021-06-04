@@ -14,7 +14,7 @@ export default function ProfileTab() {
   const [description, setDescription] = useState<string>("");
 
   return (
-    <div className="mt-5 md:w-4/5">
+    <div className="mt-5">
       <div className="mb-20">
         <div className="mb-5">
           <SubTitle plain>Personal Information</SubTitle>
@@ -22,7 +22,7 @@ export default function ProfileTab() {
             Pariatur in dolor adipisicing velit anim et cillum culpa.
           </Text>
         </div>
-        <Flex>
+        <Flex wrap>
           <TextInput
             label="Name"
             value={fullName}
@@ -40,7 +40,7 @@ export default function ProfileTab() {
           label="Description"
           value={description}
           type="text"
-          placeholder="Brief description. Would be shown wh"
+          placeholder="A breif description about yourself"
           onChange={setDescription}
         ></TextInput>
       </div>

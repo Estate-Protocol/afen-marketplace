@@ -8,7 +8,7 @@ import { GrMedium, GrInstagram, GrTwitter } from "react-icons/gr";
 
 export default function Footer() {
   return (
-    <footer className="w-full border-t border-gray-800 px-4 py-32 mt-auto mx-auto flex align-middle tracking-wide">
+    <footer className="w-full border-t border-gray-800 px-4 py-20 md:py-32 mt-auto mx-auto flex align-middle tracking-wide">
       <Container>
         <div className="flex flex-wrap justify-between md:w-4/5 mb-10 md:mb-20">
           <div className="mb-10 md:mb-0">

@@ -6,6 +6,8 @@ interface FlexProps {
   wrap?: boolean;
   children: ReactNode | Element[];
   style?: string;
+  col?: boolean;
+  center?: boolean;
 }
 
 export default function Flex({
@@ -13,6 +15,8 @@ export default function Flex({
   style,
   spaceBetween,
   start,
+  col,
+  center,
   wrap,
 }: FlexProps) {
   return (
@@ -21,7 +25,10 @@ export default function Flex({
         start ? "items-start" : "items-end"
       }
       ${wrap && "flex-wrap md:flex-nowrap"}
-      ${spaceBetween && "justify-between"} ${style}`}
+      ${spaceBetween && "justify-between"}
+      ${col && "flex-col"} 
+      ${center && "items-center"} 
+      ${style}`}
     >
       {children}
     </div>

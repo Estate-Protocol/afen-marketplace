@@ -26,7 +26,7 @@ export default function TextInput({
   onChange,
 }: TextInput) {
   return (
-    <div className="mb-8 border-b border-gray-500">
+    <div className="mb-8 border-b border-gray-500 w-full">
       <label htmlFor={slugifyText(label)} className="">
         <Text>{label}</Text>
         {description && (
@@ -35,7 +35,7 @@ export default function TextInput({
           </Text>
         )}
       </label>
-      <div className="inline-flex items-center mt-2">
+      <div className="inline-flex items-center w-full mt-2">
         {icon}
         <input
           name={slugifyText(label)}
@@ -44,7 +44,7 @@ export default function TextInput({
           disabled={disabled}
           placeholder={placeholder}
           required={required}
-          className="py-2 bg-afen-blue focus:outline-none rounded w-full md:w-96"
+          className="py-2 bg-afen-blue focus:outline-none rounded w-full"
           onChange={(e) => onChange(e.target.value)}
         />
       </div>

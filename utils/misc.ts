@@ -14,3 +14,5 @@ export const slugifyText = (text: string) => {
     lower: true,
   });
 };
+
+export const isMobile = () => {};
