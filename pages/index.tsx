@@ -33,7 +33,7 @@ export default function Home() {
               art.verified === "government" && (
                 <div
                   className={`${
-                    (index > 0 && "mx-2") || "mr-2"
+                    index > 0 ? "mx-2" : "mr-2"
                   } shadow-md border border-gray-700 rounded`}
                 >
                   <Card
@@ -154,7 +154,7 @@ export default function Home() {
               art.verified === "afen" && (
                 <div
                   className={`${
-                    (index > 0 && "mx-2") || "mr-2"
+                    index > 0 ? "mx-2" : "mr-2"
                   } shadow-md border border-gray-700 rounded`}
                 >
                   <Card
@@ -210,7 +210,7 @@ export default function Home() {
               !art.verified && (
                 <div
                   className={`${
-                    (index > 0 && "mx-2") || "mr-2"
+                    index > 0 ? "mx-2" : "mr-2"
                   } shadow-md border border-gray-700 rounded`}
                 >
                   <Card

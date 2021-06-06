@@ -25,7 +25,11 @@ export default function Text({
   };
 
   return (
-    <p className={`${getTextSize()} ${style} ${sub && "dark:text-gray-500"} `}>
+    <p
+      className={`tracking-tight ${getTextSize()} ${style} ${
+        sub ? "dark:text-gray-500" : ""
+      } `}
+    >
       {children}
     </p>
   );

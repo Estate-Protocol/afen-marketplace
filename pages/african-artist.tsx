@@ -18,7 +18,7 @@ export default function AfricanArtist() {
         <Flex style="mt-5 flex-wrap">
           {arts.map((art, index) => (
             <Card
-              style={`${(index > 0 && "mx-4") || "mr-4"} mb-10 relative`}
+              style={`${index > 0 ? "mx-4" : "mr-4"} mb-10 relative`}
               key={index}
               onClick={() => router.push(`/token/${art.id}`)}
             >

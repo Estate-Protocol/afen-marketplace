@@ -19,10 +19,7 @@ export default function Listing({ subtitle, title, listing }: Listing) {
 
       <Flex style="mt-5">
         {listing.map((item, index) => (
-          <Card
-            key={index}
-            style={`${(index > 0 && "mx-4") || "mr-4"} relative`}
-          >
+          <Card key={index} style={`${index > 0 ? "mx-4" : "mr-4"} relative`}>
             <CardText style="flex justify-between items-end">
               <div>
                 <Text style="text-xl">{item.name}</Text>

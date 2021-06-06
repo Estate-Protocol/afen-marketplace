@@ -68,8 +68,8 @@ export default function Button({
     }
 
     return `${defaultStyle} ${buttonStyle} ${
-      icon && "inline-flex items-center justify-between "
-    } ${block && "w-full"} ${style}`;
+      icon ? "inline-flex items-center justify-between" : ""
+    } ${block ? "w-full" : ""}  ${style}`;
   };
 
   return (

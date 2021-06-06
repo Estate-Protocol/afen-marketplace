@@ -145,13 +145,15 @@ export default class CreateForm extends Component<IProps, IState> {
                         <div className="col-span-full">
                           <div
                             className={`px-8 py-6 group border border-white rounded-lg mb-2 cursor-pointer ${
-                              this.state.fixed && "border-2 border-afen-yellow"
+                              this.state.fixed
+                                ? "border-2 border-afen-yellow"
+                                : ""
                             }`}
                             onClick={this.handlePriceSelection}
                           >
                             <Text
                               style={`text-lg group-hover:text-afen-yellow ${
-                                this.state.fixed && "text-afen-yellow"
+                                this.state.fixed ? "text-afen-yellow" : ""
                               }`}
                             >
                               Fixed
@@ -166,14 +168,15 @@ export default class CreateForm extends Component<IProps, IState> {
                         <div className="col-span-full">
                           <div
                             className={`px-8 py-6 group border border-white rounded-lg mb-2 cursor-pointer ${
-                              this.state.auction &&
-                              "border-2  border-afen-yellow"
+                              this.state.auction
+                                ? "border-2 border-afen-yellow"
+                                : ""
                             }`}
                             onClick={this.handlePriceSelection}
                           >
                             <Text
                               style={`text-lg group-hover:text-afen-yellow ${
-                                this.state.auction && "text-afen-yellow"
+                                this.state.auction ? "text-afen-yellow" : ""
                               }`}
                             >
                               Auction

@@ -22,7 +22,9 @@ export default function TabsComponent({ tabs }: TabsComponentProps) {
         <Tab
           key={index}
           className={`text-gray-400 list-none inline-block pr-5 mr-8 cursor-pointer dark:focus:text-white pb-1 transition-colors duration-75 ease-linear text-sm ${
-            tabIndex === index && "dark:text-afen-yellow border-b border-black dark:border-afen-yellow"
+            tabIndex === index
+              ? "dark:text-afen-yellow border-b border-black dark:border-afen-yellow"
+              : ""
           }`}
         >
           {title}
