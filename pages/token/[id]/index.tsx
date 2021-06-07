@@ -11,6 +11,7 @@ import { TokenDetailsProps } from "@/pages/token/TokenDetails";
 import { ArrowSmUpIcon, ArrowSmDownIcon } from "@heroicons/react/solid";
 import { ClockIcon } from "@heroicons/react/outline";
 import Button from "@/design-system/Button";
+import Link from "next/link";
 
 // getStaticPaths
 // getStaticProps
@@ -116,18 +117,20 @@ export default function Token() {
             <div className="flex justify-between items-start mb-8">
               <div>
                 <Title style="">Minding my business</Title>
-                <div className="flex mt-1">
-                  <div className="w-6 h-6 relative overflow-hidden rounded-full mr-1">
-                    <Image
-                      src={
-                        "https://images.unsplash.com/photo-1501472312651-726afe119ff1?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzJ8fGFydHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-                      }
-                      layout="fill"
-                      objectFit="none"
-                    ></Image>
+                <Link href="/profile/artist">
+                  <div className="flex mt-1 cursor-pointer">
+                    <div className="w-6 h-6 relative overflow-hidden rounded-full mr-1">
+                      <Image
+                        src={
+                          "https://images.unsplash.com/photo-1501472312651-726afe119ff1?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzJ8fGFydHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
+                        }
+                        layout="fill"
+                        objectFit="none"
+                      ></Image>
+                    </div>
+                    <SubTitle style="text-gray-500">Yusuf Aina</SubTitle>
                   </div>
-                  <SubTitle style="text-gray-500">Yusuf Aina</SubTitle>
-                </div>
+                </Link>
               </div>
               <div className="text-right inline-flex items-start">
                 <div>

@@ -8,8 +8,14 @@ import { copyToClipboard } from "utils/misc";
 import { DuplicateIcon } from "@heroicons/react/solid";
 import Image from "next/image";
 import Flex from "@/design-system/Flex";
+import { UserProfile } from "@/pages/User/types/User";
 
-export default function UserProfile() {
+export default function UserProfilePage() {
+  const user: UserProfile = {
+    fullName: "Christina Henry",
+    walletAddress: "VnF72axMyh4N8CACUVxMg8vNwZaXRlBjPJ36x8x5GF2NXEXYHvIrhvy",
+  };
+
   return (
     <div>
       <div
@@ -39,9 +45,11 @@ export default function UserProfile() {
             layout="fill"
           ></Image>
         </div>
-        <Title>Corey James</Title>
+        <Title>
+          {user.fullName ? user.fullName : `${user.firstName} ${user.lastName}`}
+        </Title>
         <div className="inline-flex">
-          <Text sub>0xVMgscGYWTW9RYDnbgly3mPcayb0ddC</Text>
+          <Text truncate textWidth="w-60" sub>{user.walletAddress}</Text>
           <DuplicateIcon
             onClick={() => copyToClipboard("0xVMgscGYWTW9RYDnbgly3mPcayb0ddC")}
             className={`ml-2 h-5 w-5 text-orange-300 group-hover:text-opacity-80 transition ease-in-out duration-150 cursor-pointer`}
@@ -58,7 +66,7 @@ export default function UserProfile() {
                 tabs={[
                   {
                     title: "Profile",
-                    body: <ProfileTab />,
+                    body: <ProfileTab data={user} />,
                   },
                 ]}
               />

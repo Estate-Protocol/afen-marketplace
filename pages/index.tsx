@@ -90,7 +90,7 @@ export default function Home() {
                 <Text style="text-afen-yellow">{arts[0].price} BNB</Text>
               </Flex>
               <div className="mb-4">
-                <Text sub>{arts[0].description}</Text>
+                <Text size="small" sub>{arts[0].description}</Text>
                 {/* <Text size="x-small" sub style="mt-1">
                   Auction ends in 10 hours
                 </Text> */}
@@ -105,7 +105,7 @@ export default function Home() {
               </Button>
             </div>
           </Flex>
-          <Flex style="md:ml-5 mt-5">
+          <Flex style="md:ml-12 mt-5">
             <div
               className={`${"mr-5"} shadow-md border border-gray-700 rounded`}
             >
@@ -124,7 +124,7 @@ export default function Home() {
                 <Text style="text-afen-yellow">{arts[1].price} BNB</Text>
               </Flex>
               <div className="mb-4">
-                <Text sub>{arts[0].description}</Text>
+                <Text size="small" sub>{arts[0].description}</Text>
                 {/* <Text size="x-small" sub style="mt-1">
                   Auction ends in 10 hours
                 </Text> */}

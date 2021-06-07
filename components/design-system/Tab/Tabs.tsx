@@ -6,6 +6,7 @@ export interface TabsComponentProps {
   tabs: {
     title: string;
     body: ReactNode | null;
+    disabled?: boolean;
   }[];
 }
 
@@ -18,8 +19,9 @@ export default function TabsComponent({ tabs }: TabsComponentProps) {
       selectedIndex={tabIndex}
       onSelect={(index) => setTabIndex(index)}
     >
-      {tabs.map(({ title }, index) => (
+      {tabs.map(({ title, disabled }, index) => (
         <Tab
+          disabled={disabled}
           key={index}
           className={`text-gray-400 list-none inline-block pr-5 mr-8 cursor-pointer dark:focus:text-white pb-1 transition-colors duration-75 ease-linear text-sm ${
             tabIndex === index

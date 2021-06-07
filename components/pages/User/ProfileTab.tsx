@@ -4,14 +4,19 @@ import Text from "@/design-system/Text";
 import React, { useState } from "react";
 import SubTitle from "@/design-system/SubTitle";
 import Button from "@/design-system/Button";
+import { UserProfile } from "./types/User";
 
-export default function ProfileTab() {
-  const [fullName, setFullName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [instagram, setInstagram] = useState<string>("");
-  const [twitter, setTwitter] = useState<string>("");
-  const [portfolioLink, setPortfolioLink] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
+interface ProfileTabProps {
+  data: UserProfile;
+}
+
+export default function ProfileTab({ data }: ProfileTabProps) {
+  const [fullName, setFullName] = useState<string>(data.fullName);
+  const [email, setEmail] = useState<string>(data.email);
+  const [instagram, setInstagram] = useState<string>(data?.instragram?.url || "");
+  const [twitter, setTwitter] = useState<string>(data?.twitter?.url || "");
+  const [portfolioLink, setPortfolioLink] = useState<string>(data.portfolio);
+  const [description, setDescription] = useState<string>(data.description);
 
   return (
     <div className="mt-5">

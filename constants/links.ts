@@ -15,8 +15,8 @@ export const userLinks = [
     href: "/",
   },
   {
-    label: "Edit profile",
-    href: "/user/profile",
+    label: "My profile",
+    href: "/profile",
   },
   {
     label: "Reports",

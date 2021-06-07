@@ -5,6 +5,8 @@ interface TextProps extends BaseComponent {
   size?: "small" | "x-small" | "default";
   variation?: "create" | "sub" | "";
   sub?: boolean;
+  truncate?: boolean;
+  textWidth?: string;
 }
 
 export default function Text({
@@ -12,6 +14,8 @@ export default function Text({
   style,
   sub,
   size = "default",
+  truncate,
+  textWidth,
 }: TextProps) {
   const getTextSize = () => {
     switch (size) {
@@ -28,7 +32,7 @@ export default function Text({
     <p
       className={`tracking-tight ${getTextSize()} ${style} ${
         sub ? "dark:text-gray-500" : ""
-      } `}
+      } ${truncate && textWidth ? `truncate ${textWidth}` : ""} `}
     >
       {children}
     </p>

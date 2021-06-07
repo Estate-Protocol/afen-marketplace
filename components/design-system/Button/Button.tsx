@@ -51,11 +51,11 @@ export default function Button({
     switch (type) {
       case ButtonType.PRIMARY:
         buttonStyle +=
-          "px-6 py-2 rounded-2xl bg-blue-600 border-2 border-afen-blue-light dark:text-white font-semibold ml-2 focus:outline-none ";
+          "px-6 py-2 rounded-2xl bg-afen-yellow border-2 border-afen-blue-light dark:text-black font-semibold ml-2 focus:outline-none ";
         break;
       case ButtonType.SECONDARY:
         buttonStyle +=
-          "px-6 py-2 rounded-2xl bg-blue-600 bg-opacity-30 dark:text-blue-500 font-semibold ";
+          "px-6 py-2 rounded-2xl bg-afen-yellow bg-opacity-30 dark:text-almond font-semibold ";
         break;
       case ButtonType.OUTLINED:
         buttonStyle += "border-2 border-almond bg-none ";
@@ -69,7 +69,7 @@ export default function Button({
 
     return `${defaultStyle} ${buttonStyle} ${
       icon ? "inline-flex items-center justify-between" : ""
-    } ${block ? "w-full" : ""}  ${style}`;
+    } ${block ? "w-full py-3" : ""}  ${style}`;
   };
 
   return (

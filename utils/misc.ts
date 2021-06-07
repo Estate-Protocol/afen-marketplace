@@ -16,3 +16,7 @@ export const slugifyText = (text: string) => {
 };
 
 export const isMobile = () => {};
+
+export const parseUrl = (url: string) => {
+  return url.replace(/^(?:https?:\/\/)?(?:www\.)?(mailto:)?(tel:)?/i, "");
+};
