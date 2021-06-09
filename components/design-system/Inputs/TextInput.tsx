@@ -5,13 +5,16 @@ import { slugifyText } from "utils/misc";
 interface TextInput {
   label: string;
   description?: string;
-  type?: string;
-  value?: string;
+  type?: "text" | "number" | "email" | "password" | "search" | "tel";
+  value?: string | number;
   disabled?: boolean;
   icon?: ReactNode;
   placeholder?: string;
   required?: boolean;
-  onChange: (text: string) => void;
+  min?: number;
+  max?: number;
+  prepend?: string;
+  onChange?: (text: any) => void;
 }
 
 export default function TextInput({
@@ -23,19 +26,17 @@ export default function TextInput({
   description,
   required,
   disabled,
+  min,
+  max,
+  prepend,
   onChange,
 }: TextInput) {
   return (
-    <div className="mb-8 border-b border-gray-500 w-full">
-      <label htmlFor={slugifyText(label)} className="">
+    <div className="mb-5 w-full">
+      <label htmlFor={slugifyText(label)}>
         <Text>{label}</Text>
-        {description && (
-          <Text sub size="small" style="mb-1">
-            {description}
-          </Text>
-        )}
       </label>
-      <div className="inline-flex items-center w-full mt-2">
+      <div className="inline-flex items-center w-full mt-2 border-b border-gray-500">
         {icon}
         <input
           name={slugifyText(label)}
@@ -44,10 +45,22 @@ export default function TextInput({
           disabled={disabled}
           placeholder={placeholder}
           required={required}
-          className="py-2 bg-afen-blue focus:outline-none rounded w-full"
+          min={min}
+          max={max}
+          className={`py-1 bg-afen-blue focus:outline-none w-full ${
+            disabled ? "text-gray-600" : "text-gray-300"
+          }`}
           onChange={(e) => onChange(e.target.value)}
         />
+        <Text sub style="ml-2">
+          {prepend}
+        </Text>
       </div>
+      {description && (
+        <Text sub size="x-small" style="mt-2">
+          {description}
+        </Text>
+      )}
     </div>
   );
 }

@@ -3,18 +3,21 @@ import TabsComponent from "@/design-system/Tab";
 import Title from "@/design-system/Title";
 import Text from "@/design-system/Text";
 import { ProfileTab } from "@/pages/User";
-import React from "react";
+import React, { useState } from "react";
 import { copyToClipboard } from "utils/misc";
 import { DuplicateIcon } from "@heroicons/react/solid";
 import Image from "next/image";
 import Flex from "@/design-system/Flex";
 import { UserProfile } from "@/pages/User/types/User";
+import { FcCheckmark } from "react-icons/fc";
 
 export default function UserProfilePage() {
   const user: UserProfile = {
     fullName: "Christina Henry",
     walletAddress: "VnF72axMyh4N8CACUVxMg8vNwZaXRlBjPJ36x8x5GF2NXEXYHvIrhvy",
   };
+
+  const [copied, setCopied] = useState(false);
 
   return (
     <div>
@@ -49,12 +52,20 @@ export default function UserProfilePage() {
           {user.fullName ? user.fullName : `${user.firstName} ${user.lastName}`}
         </Title>
         <div className="inline-flex">
-          <Text truncate textWidth="w-60" sub>{user.walletAddress}</Text>
-          <DuplicateIcon
-            onClick={() => copyToClipboard("0xVMgscGYWTW9RYDnbgly3mPcayb0ddC")}
-            className={`ml-2 h-5 w-5 text-orange-300 group-hover:text-opacity-80 transition ease-in-out duration-150 cursor-pointer`}
-            aria-hidden="true"
-          />
+          <Text truncate textWidth="w-60" sub>
+            {user.walletAddress}
+          </Text>
+          {copied ? (
+            <FcCheckmark className="ml-2 h-5 w-5" />
+          ) : (
+            <DuplicateIcon
+              onClick={() =>
+                copyToClipboard("0xVMgscGYWTW9RYDnbgly3mPcayb0ddC", setCopied)
+              }
+              className={`ml-2 h-5 w-5 text-orange-300 group-hover:text-opacity-80 transition ease-in-out duration-150 cursor-pointer`}
+              aria-hidden="true"
+            />
+          )}
         </div>
       </div>
 

@@ -9,6 +9,7 @@ interface TextProps extends BaseComponent {
   textWidth?: string;
 }
 
+// TODO: onCopy
 export default function Text({
   children,
   style,

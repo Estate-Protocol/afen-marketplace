@@ -1,15 +1,15 @@
 export const navigationLinks = [
   {
-    label: "Browse",
-    href: "/",
-  },
-  {
     label: "Get Started",
     href: "/",
   },
 ];
 
 export const userLinks = [
+  {
+    label: "Create",
+    href: "/create",
+  },
   {
     label: "My items",
     href: "/",

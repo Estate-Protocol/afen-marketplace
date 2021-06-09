@@ -13,6 +13,8 @@ interface ButtonProps extends BaseComponent {
   url?: string;
   type?: "primary" | "secondary" | "outlined" | "plain";
   size?: "slim" | "medium" | "large";
+  variant?: "add" | "delete";
+  hover?: boolean;
   icon?: boolean;
   plain?: boolean;
   block?: boolean;
@@ -38,30 +40,34 @@ export default function Button({
   children,
   style,
   type = "primary",
+  hover = true,
   icon,
   block,
+  disabled,
   onClick,
   onFocus,
 }: ButtonProps) {
   const getButtonStyle = (): string => {
-    const defaultStyle = "font-semibold text-sm px-3 focus:outline-none";
+    const defaultStyle = "font-medium text-sm focus:outline-none";
 
-    let buttonStyle = "rounded py-2 text-md ";
+    let buttonStyle = "py-2 text-md ";
 
     switch (type) {
       case ButtonType.PRIMARY:
         buttonStyle +=
-          "px-6 py-2 rounded-2xl bg-afen-yellow border-2 border-afen-blue-light dark:text-black font-semibold ml-2 focus:outline-none ";
+          "px-4 py-2 rounded-md bg-afen-yellow text-black ml-2 focus:outline-none";
         break;
       case ButtonType.SECONDARY:
         buttonStyle +=
-          "px-6 py-2 rounded-2xl bg-afen-yellow bg-opacity-30 dark:text-almond font-semibold ";
+          "px-4 py-2 rounded-md bg-afen-yellow bg-opacity-40 dark:text-afen-yellow";
         break;
       case ButtonType.OUTLINED:
-        buttonStyle += "border-2 border-almond bg-none ";
+        buttonStyle += "rounded border-2 border-almond bg-none";
         break;
       case ButtonType.PLAIN:
-        buttonStyle += "hover:text-afen-yellow dark:hover:text-almond px-0 ";
+        buttonStyle += `px-0 ${
+          hover ? "hover:text-gray-300 dark:hover:text-gray-300" : ""
+        } `;
         break;
       default:
         buttonStyle += "";
@@ -69,7 +75,9 @@ export default function Button({
 
     return `${defaultStyle} ${buttonStyle} ${
       icon ? "inline-flex items-center justify-between" : ""
-    } ${block ? "w-full py-3" : ""}  ${style}`;
+    } ${block ? "w-full py-4" : ""} ${disabled ? "hover:text-gray-500" : ""} ${
+      style ? style : null
+    }`;
   };
 
   return (

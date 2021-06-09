@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import UserDropdownMenu from "@/design-system/UserDropdownMenu";
 import { ethers } from "ethers";
 import { navigationLinks } from "../../constants/links";
+import data from "data";
 // import { BsWallet } from "react-icons/bs";
 
 export default function Header() {
@@ -57,33 +58,43 @@ export default function Header() {
   return (
     <div className="bg-white dark:bg-afen-blue px-4 md:px-10 lg:px-16 py-4 mx-auto border-b dark:border-gray-800 flex items-center">
       <Link href="/">
-        <a className="flex items-center font-mono tracking-wide">
-          <Image src="/logo.png" width="40" height="40" />
-          <p className="ml-2 font-weight-bold text-xl text-white">AFEN</p>
+        <a className="flex items-center">
+          <Image src="/logo.png" width="30" height="30" />
+          <p className="ml-2 font-weight-medium text-xl text-white tracking-tight">
+            Marketplace
+          </p>
         </a>
       </Link>
 
       <div className="ml-auto">
         {navigationLinks.map((link) => (
           <Link href={link.href}>
-            <Button type="plain">{link.label}</Button>
+            <Button type="plain" style="mx-4">
+              {link.label}
+            </Button>
           </Link>
         ))}
         {accounts?.length ? (
-          <UserDropdownMenu data={{ account: accounts[0], balance }} />
+          <UserDropdownMenu
+            data={{
+              account: accounts[0],
+              balance,
+              profileImage: data[8].image.src,
+            }}
+          />
         ) : (
           <Button
             onClick={connectWallet} // TODO: Handle no connection
-            type={"secondary"}
+            type="primary"
           >
             Connect Wallet
           </Button>
         )}
-        <Link href="/create">
+        {/* <Link href="/create">
           <Button type="primary" style="mx-3">
             Create
           </Button>
-        </Link>
+        </Link> */}
       </div>
     </div>
   );

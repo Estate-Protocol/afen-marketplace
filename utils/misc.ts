@@ -1,8 +1,17 @@
 import slugify from "slugify";
 
-export const copyToClipboard = async (data: string) => {
+export const copyToClipboard = async (
+  data: string,
+  setCopied?: (value: boolean) => void
+) => {
   try {
     await navigator.clipboard.writeText(data);
+    if (setCopied) {
+      setCopied(true);
+      setTimeout(function () {
+        setCopied(false);
+      }, 2000);
+    }
   } catch (err) {
     // do nothing
   }

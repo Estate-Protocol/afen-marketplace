@@ -1,15 +1,25 @@
 import { Popover, Transition } from "@headlessui/react";
 import { DuplicateIcon, UserCircleIcon } from "@heroicons/react/solid";
 import Link from "next/link";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { copyToClipboard } from "utils/misc";
 import { userLinks } from "../../../constants/links";
+import { FcCheckmark } from "react-icons/fc";
+import Text from "../Text";
+import Image from "next/image";
 
 interface UserDropdownMenuProps {
-  data: { displayName?: string; account: string; balance: string };
+  data: {
+    displayName?: string;
+    account: string;
+    balance: string;
+    profileImage?: string;
+  };
 }
 
 export default function UserDropdownMenu({ data }: UserDropdownMenuProps) {
+  const [copied, setCopied] = useState(false);
+
   return (
     <div className="px-4 inline-block">
       <Popover className="relative">
@@ -21,12 +31,23 @@ export default function UserDropdownMenu({ data }: UserDropdownMenuProps) {
             group bg-orange-700 px-3 inline-flex items-center text-base font-medium hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75`}
             >
               <p>{data.account?.substring(0, 2)}</p>
-              <UserCircleIcon
-                className={`${
-                  open ? "" : "text-opacity-70"
-                } ml-2 h-8 w-8 text-orange-300 group-hover:text-opacity-80 transition ease-in-out duration-150`}
-                aria-hidden="true"
-              />
+              <div className="ml-2">
+                {data.profileImage ? (
+                  <Image
+                    src={data.profileImage}
+                    width="30"
+                    height="30"
+                    className="rounded-full"
+                  />
+                ) : (
+                  <UserCircleIcon
+                    className={`${
+                      open ? "" : "text-opacity-70"
+                    } h-8 w-8 text-orange-300 group-hover:text-opacity-80 transition ease-in-out duration-150`}
+                    aria-hidden="true"
+                  />
+                )}
+              </div>
             </Popover.Button>
             <Transition
               as={Fragment}
@@ -40,17 +61,23 @@ export default function UserDropdownMenu({ data }: UserDropdownMenuProps) {
               <Popover.Panel className="absolute z-10 w-60 max-w-sm px-4 mt-3 transform right-1 sm:px-0 lg:max-w-3x">
                 <div className="overflow-hidden rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 overflow-ellipsis">
                   <div className="p-7 border-b bg-afen-blue-light border-gray-700">
-                    <div className="flex">
-                      <p className="font-bold w-24 lg:w-48 overflow-hidden overflow-ellipsis mb-5">
+                    <div className="flex mb-5">
+                      <Text truncate textWidth="w-24 lg:w-48">
                         {data.account}
-                      </p>
-                      <DuplicateIcon
-                        onClick={() => copyToClipboard(data.account)}
-                        className={`${
-                          open ? "" : "text-opacity-70"
-                        } ml-2 h-5 w-5 text-orange-300 group-hover:text-opacity-80 transition ease-in-out duration-150 cursor-pointer`}
-                        aria-hidden="true"
-                      />
+                      </Text>
+                      {copied ? (
+                        <FcCheckmark className="ml-2 h-5 w-5" />
+                      ) : (
+                        <DuplicateIcon
+                          onClick={() =>
+                            copyToClipboard(data.account, setCopied)
+                          }
+                          className={`${
+                            open ? "" : "text-opacity-70"
+                          } ml-2 h-5 w-5 group-hover:text-opacity-80 transition ease-in-out duration-150 cursor-pointer`}
+                          aria-hidden="true"
+                        />
+                      )}
                     </div>
 
                     <div className="flex items-center px-2 pt-2 -m-3 transition duration-150 ease-in-out rounded-lg focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50">

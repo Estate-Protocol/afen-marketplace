@@ -2,13 +2,14 @@ import Container from "@/design-system/Container";
 import TabsComponent from "@/design-system/Tab";
 import Title from "@/design-system/Title";
 import Text from "@/design-system/Text";
-import React from "react";
+import React, { useState } from "react";
 import { copyToClipboard, parseUrl } from "utils/misc";
 import { DuplicateIcon } from "@heroicons/react/solid";
 import Image from "next/image";
 import Flex from "@/design-system/Flex";
 import { ArtistProfile } from "@/pages/ArtistProfile/types/ArtistProfile";
 import { GrInstagram, GrTwitter } from "react-icons/gr";
+import { FcCheckmark } from "react-icons/fc";
 
 // interface ArtistProfilePageProps {
 //   data: ArtistProfile;
@@ -29,6 +30,8 @@ export default function ArtistProfilePage() {
       handle: "Afenblockchain",
     },
   };
+
+  const [copied, setCopied] = useState(false);
 
   return (
     <div>
@@ -60,11 +63,18 @@ export default function ArtistProfilePage() {
           <Text truncate textWidth="w-60" sub>
             {artist.walletAddress}
           </Text>
-          <DuplicateIcon
-            onClick={() => copyToClipboard("0xVMgscGYWTW9RYDnbgly3mPcayb0ddC")}
-            className={`ml-2 h-5 w-5 text-orange-300 group-hover:text-opacity-80 transition ease-in-out duration-150 cursor-pointer`}
-            aria-hidden="true"
-          />
+
+          {copied ? (
+            <FcCheckmark className="ml-2 h-5 w-5" />
+          ) : (
+            <DuplicateIcon
+              onClick={() =>
+                copyToClipboard("0xVMgscGYWTW9RYDnbgly3mPcayb0ddC", setCopied)
+              }
+              className={`ml-2 h-5 w-5 group-hover:text-opacity-80 transition ease-in-out duration-150 cursor-pointer`}
+              aria-hidden="true"
+            />
+          )}
         </div>
         {artist.twitter && (
           <>
