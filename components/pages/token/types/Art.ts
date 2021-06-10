@@ -1,4 +1,5 @@
 export interface Art {
+  id?: string;
   title: string;
   creation: Date | string;
   auction?: boolean;

@@ -9,7 +9,7 @@ interface CardMediaProps {
 export default function CardMedia({ src, alt }: CardMediaProps) {
   return (
     <div>
-      <Image src={src} layout="fill" objectFit="none" alt={alt}></Image>
+      <Image src={src} layout="fill" objectFit="cover" alt={alt}></Image>
     </div>
   );
 }

@@ -56,11 +56,11 @@ export default function Header() {
   };
 
   return (
-    <div className="bg-white dark:bg-afen-blue px-4 md:px-10 lg:px-16 py-4 mx-auto border-b dark:border-gray-800 flex items-center">
+  <div className="fixed w-full z-50 bg-white dark:bg-afen-blue px-4 md:px-10 lg:px-16 py-4 mx-auto border-b-2 dark:border-gray-800 flex items-center">
       <Link href="/">
         <a className="flex items-center">
           <Image src="/logo.png" width="30" height="30" />
-          <p className="ml-2 font-weight-medium text-xl text-white tracking-tight">
+          <p className="ml-2 font-weight-medium text-xl text-black dark:text-white tracking-tight">
             Marketplace
           </p>
         </a>

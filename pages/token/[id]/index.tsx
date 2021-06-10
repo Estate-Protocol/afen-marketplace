@@ -12,6 +12,7 @@ import { ArrowSmUpIcon, ArrowSmDownIcon } from "@heroicons/react/solid";
 import { ClockIcon } from "@heroicons/react/outline";
 import Button from "@/design-system/Button";
 import Link from "next/link";
+import Flex from "@/design-system/Flex";
 
 // getStaticPaths
 // getStaticProps
@@ -72,42 +73,45 @@ export default function Token() {
   return (
     <div>
       <div className="bg-white dark:bg-gray-700 overflow-x-scroll w-full">
-        <Container style="py-2 uppercase text-black dark: text-xs flex justify-between whitespace-nowrap overflow-x-auto">
-          <div className="inline-flex">
-            <Text style="dark:text-white mx-5 md:mx-0">
-              <span className="dark:text-gray-400">Minted:</span> 3 months ago
-            </Text>
-          </div>
-          <div className="inline-flex items-center">
-            <ClockIcon
-              className={`mr-1 h-4 w-4 text-white group-hover:text-opacity-80 transition ease-in-out duration-150 cursor-pointer`}
-              aria-hidden="true"
-            />
-            <Text style="dark:text-white mx-5 md:mx-0">
-              <span className="dark:text-gray-400">Auction Ends:</span> In 5hrs
-            </Text>
-          </div>
-          <div className="inline-flex mx-5 md:mx-0">
-            <ArrowSmUpIcon
-              className={`ml-2 h-4 w-4 text-green-400 group-hover:text-opacity-80 transition ease-in-out duration-150 cursor-pointer`}
-              aria-hidden="true"
-            />
-            <Text style="dark:text-green-400">Bids: 5</Text>
-          </div>
-          <div className="inline-flex mx-5 md:mx-0">
-            <ArrowSmDownIcon
-              className={`ml-2 h-4 w-4 text-red-400 group-hover:text-opacity-80 transition ease-in-out duration-150 cursor-pointer`}
-              aria-hidden="true"
-            />
-            <Text style="dark:text-red-400">Latest Bid: 0.95 BNB</Text>
-          </div>
-          <div className="inline-flex mx-5 md:mx-0">
-            <ArrowSmUpIcon
-              className={`ml-2 h-4 w-4 text-green-400 group-hover:text-opacity-80 transition ease-in-out duration-150 cursor-pointer`}
-              aria-hidden="true"
-            />
-            <Text style="dark:text-green-400">Highest Bid: 1.4 BNB</Text>
-          </div>
+        <Container>
+          <Flex spaceBetween style="py-2 uppercase text-black text-xs whitespace-nowrap overflow-x-auto">
+            <div className="inline-flex">
+              <Text style="dark:text-white mx-5 md:mx-0">
+                <span className="dark:text-gray-400">Minted:</span> 3 months ago
+              </Text>
+            </div>
+            <div className="inline-flex items-center">
+              <ClockIcon
+                className={`mr-1 h-4 w-4 text-white group-hover:text-opacity-80 transition ease-in-out duration-150 cursor-pointer`}
+                aria-hidden="true"
+              />
+              <Text style="dark:text-white mx-5 md:mx-0">
+                <span className="dark:text-gray-400">Auction Ends:</span> In
+                5hrs
+              </Text>
+            </div>
+            <div className="inline-flex mx-5 md:mx-0">
+              <ArrowSmUpIcon
+                className={`ml-2 h-4 w-4 text-green-400 group-hover:text-opacity-80 transition ease-in-out duration-150 cursor-pointer`}
+                aria-hidden="true"
+              />
+              <Text style="dark:text-green-400">Bids: 5</Text>
+            </div>
+            <div className="inline-flex mx-5 md:mx-0">
+              <ArrowSmDownIcon
+                className={`ml-2 h-4 w-4 text-red-400 group-hover:text-opacity-80 transition ease-in-out duration-150 cursor-pointer`}
+                aria-hidden="true"
+              />
+              <Text style="dark:text-red-400">Latest Bid: 0.95 BNB</Text>
+            </div>
+            <div className="inline-flex mx-5 md:mx-0">
+              <ArrowSmUpIcon
+                className={`ml-2 h-4 w-4 text-green-400 group-hover:text-opacity-80 transition ease-in-out duration-150 cursor-pointer`}
+                aria-hidden="true"
+              />
+              <Text style="dark:text-green-400">Highest Bid: 1.4 BNB</Text>
+            </div>
+          </Flex>
         </Container>
       </div>
       <Container style="pt-20 lg:h-screen">

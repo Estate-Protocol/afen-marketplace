@@ -8,9 +8,9 @@ import { GrMedium, GrInstagram, GrTwitter } from "react-icons/gr";
 
 export default function Footer() {
   return (
-    <footer className="w-full border-t border-gray-800 px-4 py-20 md:py-32 mt-auto mx-auto flex align-middle tracking-wide">
+    <footer className="w-full border-t border-gray-800 px-4 py-10 md:py-20 mt-auto mx-auto flex align-middle tracking-wide">
       <Container>
-        <div className="flex flex-wrap justify-between md:w-4/5 mb-10 md:mb-20">
+        <div className="flex flex-wrap justify-between md:w-4/5 mb-10 md:mb-16">
           <div className="mb-10 md:mb-0">
             <a className="md:flex items-start">
               <Image src="/logo.png" width="50" height="50" />
@@ -122,7 +122,7 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-        <div className="text-center border-t border-gray-800 pt-10 inline-flex md:justify-center w-full mx-auto">
+        <div className="text-center border-t-2 dark:border-gray-800 pt-10 md:pt-20 pb-10 md:pb-0 inline-flex md:justify-center w-full mx-auto">
           <a
             href="https://www.instagram.com/afenblockchain/"
             target="_blank"

@@ -2,6 +2,7 @@ import React from "react";
 import CardMedia from "./CardMedia";
 import CardText from "./CardText";
 import CardOption from "./CardOption";
+import CardAvatar from "./CardAvatar";
 import { BaseComponent } from "@/types/BaseComponent";
 
 interface CardProps extends BaseComponent {
@@ -22,4 +23,4 @@ export default function Card({ children, style, onClick }: CardProps) {
   );
 }
 
-export { CardMedia, CardText, CardOption };
+export { CardMedia, CardText, CardOption, CardAvatar };

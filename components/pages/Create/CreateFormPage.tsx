@@ -105,7 +105,7 @@ export default class CreateForm extends Component<IProps, IState> {
 
   render() {
     return (
-      <Container style="mt-10 md:3/4 lg:w-2/3 md:mt-20 flex flex-wrap h-full">
+      <Container page style="mt-10 md:3/4 lg:w-2/3 md:mt-20 flex flex-wrap h-full">
         <div className="lg:pr-10">
           <Title>Create NFT</Title>
           <SubTitle style="md:w-3/4">
