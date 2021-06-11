@@ -13,7 +13,7 @@ export default function Home() {
     <Container page>
       <div className="mb-10">
         <ListingSectionHeader
-          title="AFEN x Ayobami Olakunle: Beyond Culture and Tribes"
+          title="AFEN x ConservatioNFT: Preserving Nature"
           subTitle="Ends Jun 3 at 8:00pm +04"
         />
         <Flex style="mt-5">
@@ -24,7 +24,7 @@ export default function Home() {
                   <HomeListingGridItem
                     item={art}
                     key={index}
-                    width="w-80"
+                    width="w-96"
                     onClick={() => router.push(`/token/${art.id}`)}
                   />
                 </div>

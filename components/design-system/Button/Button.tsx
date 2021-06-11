@@ -57,18 +57,18 @@ export default function Button({
     switch (type) {
       case ButtonType.PRIMARY:
         buttonStyle +=
-          "px-4 py-2 rounded-md bg-afen-yellow text-black focus:outline-none";
+          "px-5 py-2 rounded-md bg-afen-yellow text-black focus:outline-none";
         break;
       case ButtonType.SECONDARY:
         buttonStyle +=
-          "px-4 py-2 rounded-md bg-afen-yellow bg-opacity-40 dark:text-afen-yellow";
+          "px-5 py-2 rounded-md bg-afen-yellow bg-opacity-40 dark:text-afen-yellow";
         break;
       case ButtonType.OUTLINED:
         buttonStyle += "rounded border-2 border-almond bg-none";
         break;
       case ButtonType.PLAIN:
         buttonStyle += `px-0 ${
-          hover ? "hover:text-gray-300 dark:hover:text-gray-300" : ""
+          hover ? "hover:text-gray-600 dark:hover:text-gray-300" : ""
         } `;
         break;
       default:

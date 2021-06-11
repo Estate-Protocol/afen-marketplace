@@ -8,7 +8,7 @@ import { GrMedium, GrInstagram, GrTwitter } from "react-icons/gr";
 
 export default function Footer() {
   return (
-    <footer className="w-full border-t border-gray-800 px-4 py-10 md:py-20 mt-auto mx-auto flex align-middle tracking-wide">
+    <footer className="w-full border-t-2 dark:border-gray-800 px-4 py-10 md:py-20 mt-auto mx-auto flex align-middle tracking-wide">
       <Container>
         <div className="flex flex-wrap justify-between md:w-4/5 mb-10 md:mb-16">
           <div className="mb-10 md:mb-0">
@@ -28,7 +28,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <Text style="mb-2">Marketplace</Text>
+            <Text bold style="mb-2">Marketplace</Text>
             <ul>
               <li>
                 <Link href="/">
@@ -62,7 +62,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <Text style="mb-2">Wallet</Text>
+            <Text bold style="mb-2">Wallet</Text>
             <ul>
               <li>
                 <Link href="/">
@@ -96,7 +96,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <Text style="mb-2">Links</Text>
+            <Text bold style="mb-2">Links</Text>
             <ul>
               <li>
                 <a href="https://afengroup.com/whitepaper/">

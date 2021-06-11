@@ -12,6 +12,8 @@ import Text from "@/design-system/Text";
 import { FcCheckmark } from "react-icons/fc";
 import { copyToClipboard } from "utils/misc";
 import { useRouter } from "next/router";
+import { useTheme } from "next-themes";
+import { MoonIcon, SunIcon } from "@heroicons/react/solid";
 
 export default function Header() {
   const [accounts, setAccounts] = useState<string[] | null>(null);
@@ -20,6 +22,7 @@ export default function Header() {
   const [copied, setCopied] = useState(false);
 
   const router = useRouter();
+  const { theme, setTheme } = useTheme();
 
   const fetchUser = async () => {
     try {
@@ -74,16 +77,31 @@ export default function Header() {
 
   return (
     <div className="fixed w-full z-50 bg-white dark:bg-afen-blue px-4 md:px-10 lg:px-16 py-4 mx-auto border-b-2 dark:border-gray-800 flex items-center">
-      <Link href="/">
-        <a className="flex items-center" onClick={() => setMobileMenu(false)}>
-          <Image src="/logo.png" width="30" height="30" />
-          <p className="ml-1 md:ml-2 font-weight-medium text-xl text-black dark:text-white tracking-tight">
-            Marketplace
-          </p>
-        </a>
-      </Link>
+      <div className="mr-auto">
+        <Link href="/">
+          <a className="flex items-center" onClick={() => setMobileMenu(false)}>
+            <Image src="/logo.png" width="30" height="30" />
+            <p className="ml-1 md:ml-2 font-weight-medium text-xl text-black dark:text-white tracking-tight">
+              Marketplace
+            </p>
+          </a>
+        </Link>
+      </div>
 
-      <div className="ml-auto hidden md:block">
+      <div className="ml-auto border-r-2 dark:border-gray-700 pr-2 md:pr-4">
+        {theme === "dark" ? (
+          <SunIcon
+            className="h-6 cursor-pointer text-yellow-200"
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          />
+        ) : (
+          <MoonIcon
+            className="h-6 cursor-pointer text-blue-800"
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          />
+        )}
+      </div>
+      <div className="hidden md:block">
         {navigationLinks.map((link) => (
           <Link href={link.href}>
             <Button type="plain" style="mx-4">
@@ -107,7 +125,7 @@ export default function Header() {
         )}
       </div>
 
-      <div className="ml-auto md:hidden">
+      <div className="ml-2 md:hidden">
         {mobileMenu ? (
           <XIcon
             className="w-6 fill-current text-dark dark:text-white"
@@ -123,7 +141,7 @@ export default function Header() {
 
       {/* Mobile Menu */}
       {mobileMenu && (
-        <div className="md:hidden absolute top-16 right-0 w-screen h-screen dark:bg-rich-black z-40 px-4 md:px-10 lg:px-16 py-4">
+        <div className="md:hidden absolute top-16 right-0 w-screen h-screen bg-white dark:bg-rich-black z-40 px-4 md:px-10 lg:px-16 py-4">
           <Flex col style="w-full h-full pb-16">
             <div className="w-full">
               {user && (
@@ -140,7 +158,7 @@ export default function Header() {
                     </div>
                     <div>
                       <div className="inline-flex">
-                        <Text textWidth="w-60" truncate>
+                        <Text textWidth="w-60" bold truncate>
                           {user.account}
                         </Text>
                         {copied ? (

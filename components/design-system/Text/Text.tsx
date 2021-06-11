@@ -5,6 +5,7 @@ interface TextProps extends BaseComponent {
   size?: "small" | "x-small" | "default";
   variation?: "create" | "sub" | "";
   sub?: boolean;
+  bold?: boolean;
   truncate?: boolean;
   textWidth?: string;
 }
@@ -14,6 +15,7 @@ export default function Text({
   children,
   style,
   sub,
+  bold,
   size = "default",
   truncate,
   textWidth,
@@ -25,7 +27,7 @@ export default function Text({
       case "x-small":
         return "text-xs";
       default:
-        return "default";
+        return "text-base";
     }
   };
 
@@ -33,7 +35,10 @@ export default function Text({
     <p
       className={`tracking-tight ${getTextSize()} ${style} ${
         sub ? "dark:text-gray-500" : ""
-      } ${truncate && textWidth ? `truncate ${textWidth}` : ""} `}
+      } ${truncate && textWidth ? `truncate ${textWidth}` : ""}
+      ${bold ? "font-semibold" : ""}
+      `}
+      style={truncate && { lineClamp: 3, boxOrient: "vertical" }}
     >
       {children}
     </p>

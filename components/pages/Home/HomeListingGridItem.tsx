@@ -16,33 +16,35 @@ export default function HomeListingGridItem({
 }: HomeListingGridItemProps) {
   return (
     <div
-      className={`cursor-pointer shadow-sm border border-gray-300 dark:border-gray-700 rounded overflow-hidden ${
-        width ? width : ""
+      className={`cursor-pointer shadow-sm border-2 border-light-blue-500 dark:border-gray-700 overflow-hidden rounded-xl ${
+        width ? width : "w-auto"
       }`}
       onClick={onClick}
     >
-      <div className="h-96 relative bg-afen-yellow">
-        <CardMedia src={item.image.src} alt={item.image.src} />
-      </div>
+      <CardMedia src={item.image.src} alt={item.image.src} />
       <CardText>
         <Text
           textWidth="w-full"
           truncate
-          style="text-md dark:text-gray-400 capitalize"
+          style="text-xl font-medium dark:text-gray-400 capitalize"
         >
           {item.name}
         </Text>
-        <Text style="text-base font-semibold">
+        <Text style="text-base">
           {item.price} BNB
           {item.auction && item.bids.length && (
-            <span className="text-gray-700 dark:text-gray-50 text-xs ml-2">
+            <span className="text-gray-700 dark:text-gray-50 text-xs ml-1">
               ({item.bids.length} Bids)
             </span>
           )}
         </Text>
-        <Flex style="mt-2">
+        {/* <Text textWidth="w-full" truncate sub size="x-small">
+          {item.description}
+        </Text> */}
+
+        <Flex style="mt-6 md:mt-4">
           <CardAvatar image={item.owner.profileImage} />
-          <Text style="text-sm text-gray-500">{item.owner.name}</Text>
+          <Text style="text-base text-gray-500">{item.owner.name}</Text>
         </Flex>
       </CardText>
     </div>

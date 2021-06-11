@@ -8,7 +8,7 @@ interface CardMediaProps {
 
 export default function CardMedia({ src, alt }: CardMediaProps) {
   return (
-    <div>
+    <div className="h-96 relative bg-gray-200 z-0 overflow-hidden">
       <Image src={src} layout="fill" objectFit="cover" alt={alt}></Image>
     </div>
   );
