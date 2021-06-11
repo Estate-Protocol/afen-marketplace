@@ -4,13 +4,22 @@ import Button from "@/design-system/Button";
 import React, { useState } from "react";
 import UserDropdownMenu from "@/design-system/UserDropdownMenu";
 import { ethers } from "ethers";
-import { navigationLinks } from "../../constants/links";
+import { navigationLinks, userLinksMobile } from "../../constants/links";
 import data from "data";
-// import { BsWallet } from "react-icons/bs";
+import { DuplicateIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
+import Flex from "@/design-system/Flex";
+import Text from "@/design-system/Text";
+import { FcCheckmark } from "react-icons/fc";
+import { copyToClipboard } from "utils/misc";
+import { useRouter } from "next/router";
 
 export default function Header() {
   const [accounts, setAccounts] = useState<string[] | null>(null);
   const [balance, setBalance] = useState("0.00");
+  const [mobileMenu, setMobileMenu] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const router = useRouter();
 
   const fetchUser = async () => {
     try {
@@ -55,18 +64,26 @@ export default function Header() {
     await fetchUser();
   };
 
+  const user = accounts?.length
+    ? {
+        account: accounts[0],
+        balance,
+        profileImage: data[4].image.src,
+      }
+    : null;
+
   return (
-  <div className="fixed w-full z-50 bg-white dark:bg-afen-blue px-4 md:px-10 lg:px-16 py-4 mx-auto border-b-2 dark:border-gray-800 flex items-center">
+    <div className="fixed w-full z-50 bg-white dark:bg-afen-blue px-4 md:px-10 lg:px-16 py-4 mx-auto border-b-2 dark:border-gray-800 flex items-center">
       <Link href="/">
-        <a className="flex items-center">
+        <a className="flex items-center" onClick={() => setMobileMenu(false)}>
           <Image src="/logo.png" width="30" height="30" />
-          <p className="ml-2 font-weight-medium text-xl text-black dark:text-white tracking-tight">
+          <p className="ml-1 md:ml-2 font-weight-medium text-xl text-black dark:text-white tracking-tight">
             Marketplace
           </p>
         </a>
       </Link>
 
-      <div className="ml-auto">
+      <div className="ml-auto hidden md:block">
         {navigationLinks.map((link) => (
           <Link href={link.href}>
             <Button type="plain" style="mx-4">
@@ -76,11 +93,9 @@ export default function Header() {
         ))}
         {accounts?.length ? (
           <UserDropdownMenu
-            data={{
-              account: accounts[0],
-              balance,
-              profileImage: data[8].image.src,
-            }}
+            data={user}
+            walletAddressIsCopied={copied}
+            onCopyWalletAddress={setCopied}
           />
         ) : (
           <Button
@@ -90,12 +105,109 @@ export default function Header() {
             Connect Wallet
           </Button>
         )}
-        {/* <Link href="/create">
-          <Button type="primary" style="mx-3">
-            Create
-          </Button>
-        </Link> */}
       </div>
+
+      <div className="ml-auto md:hidden">
+        {mobileMenu ? (
+          <XIcon
+            className="w-6 fill-current text-dark dark:text-white"
+            onClick={() => setMobileMenu(false)}
+          />
+        ) : (
+          <MenuIcon
+            className="w-6 fill-current text-dark dark:text-white"
+            onClick={() => setMobileMenu(true)}
+          />
+        )}
+      </div>
+
+      {/* Mobile Menu */}
+      {mobileMenu && (
+        <div className="md:hidden absolute top-16 right-0 w-screen h-screen dark:bg-rich-black z-40 px-4 md:px-10 lg:px-16 py-4">
+          <Flex col style="w-full h-full pb-16">
+            <div className="w-full">
+              {user && (
+                <>
+                  <Flex style="mb-3 pb-4 border-b border-gray-800 overflow-hidden w-full">
+                    <div className="mr-2">
+                      <Image
+                        src={user.profileImage}
+                        layout="fixed"
+                        width="50"
+                        height="50"
+                        className="rounded-full"
+                      />
+                    </div>
+                    <div>
+                      <div className="inline-flex">
+                        <Text textWidth="w-60" truncate>
+                          {user.account}
+                        </Text>
+                        {copied ? (
+                          <FcCheckmark className="ml-2 h-5 w-5" />
+                        ) : (
+                          <DuplicateIcon
+                            onClick={() =>
+                              copyToClipboard(user.account, setCopied)
+                            }
+                            className={`${
+                              open ? "" : "text-opacity-70"
+                            } ml-2 h-5 w-5 group-hover:text-opacity-80 transition ease-in-out duration-150 cursor-pointer`}
+                            aria-hidden="true"
+                          />
+                        )}
+                      </div>
+                      <Text sub>{user.balance} ETH</Text>
+                    </div>
+                  </Flex>
+                  <div className="w-full text-righ mb-6">
+                    {userLinksMobile.map((link) => (
+                      <Link href={link.href}>
+                        <Button
+                          size="large"
+                          type="plain"
+                          style="block"
+                          onClick={() => setMobileMenu(false)}
+                        >
+                          {link.label}
+                        </Button>
+                      </Link>
+                    ))}
+                  </div>
+                </>
+              )}
+              <div className="w-full">
+                {navigationLinks.map((link) => (
+                  <Link href={link.href}>
+                    <Button
+                      type="plain"
+                      size="large"
+                      onClick={() => setMobileMenu(false)}
+                    >
+                      {link.label}
+                    </Button>
+                  </Link>
+                ))}
+              </div>
+            </div>
+            <Button
+              type="primary"
+              block
+              style="mt-auto w-full"
+              onClick={
+                user
+                  ? () => {
+                      router.push("/create");
+                      setMobileMenu(false);
+                    }
+                  : connectWallet
+              }
+            >
+              {user ? "Create" : "Connect Wallet"}
+            </Button>
+          </Flex>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { Popover, Transition } from "@headlessui/react";
 import { DuplicateIcon, UserCircleIcon } from "@heroicons/react/solid";
 import Link from "next/link";
-import { Fragment, useState } from "react";
+import { Dispatch, Fragment, SetStateAction } from "react";
 import { copyToClipboard } from "utils/misc";
 import { userLinks } from "../../../constants/links";
 import { FcCheckmark } from "react-icons/fc";
@@ -15,11 +15,15 @@ interface UserDropdownMenuProps {
     balance: string;
     profileImage?: string;
   };
+  walletAddressIsCopied?: boolean;
+  onCopyWalletAddress: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function UserDropdownMenu({ data }: UserDropdownMenuProps) {
-  const [copied, setCopied] = useState(false);
-
+export default function UserDropdownMenu({
+  data,
+  walletAddressIsCopied,
+  onCopyWalletAddress,
+}: UserDropdownMenuProps) {
   return (
     <div className="px-4 inline-block">
       <Popover className="relative">
@@ -65,12 +69,12 @@ export default function UserDropdownMenu({ data }: UserDropdownMenuProps) {
                       <Text truncate textWidth="w-24 lg:w-48">
                         {data.account}
                       </Text>
-                      {copied ? (
+                      {walletAddressIsCopied ? (
                         <FcCheckmark className="ml-2 h-5 w-5" />
                       ) : (
                         <DuplicateIcon
                           onClick={() =>
-                            copyToClipboard(data.account, setCopied)
+                            copyToClipboard(data.account, onCopyWalletAddress)
                           }
                           className={`${
                             open ? "" : "text-opacity-70"

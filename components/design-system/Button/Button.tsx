@@ -12,7 +12,7 @@ interface ButtonProps extends BaseComponent {
   id?: string;
   url?: string;
   type?: "primary" | "secondary" | "outlined" | "plain";
-  size?: "slim" | "medium" | "large";
+  size?: "small" | "medium" | "large";
   variant?: "add" | "delete";
   hover?: boolean;
   icon?: boolean;
@@ -39,6 +39,7 @@ interface ButtonProps extends BaseComponent {
 export default function Button({
   children,
   style,
+  size,
   type = "primary",
   hover = true,
   icon,
@@ -48,14 +49,15 @@ export default function Button({
   onFocus,
 }: ButtonProps) {
   const getButtonStyle = (): string => {
-    const defaultStyle = "font-medium text-sm focus:outline-none";
+    const defaultStyle = "font-medium focus:outline-none";
 
     let buttonStyle = "py-2 text-md ";
+    let buttonSize = "";
 
     switch (type) {
       case ButtonType.PRIMARY:
         buttonStyle +=
-          "px-4 py-2 rounded-md bg-afen-yellow text-black ml-2 focus:outline-none";
+          "px-4 py-2 rounded-md bg-afen-yellow text-black focus:outline-none";
         break;
       case ButtonType.SECONDARY:
         buttonStyle +=
@@ -73,11 +75,25 @@ export default function Button({
         buttonStyle += "";
     }
 
+    switch (size) {
+      case "large":
+        buttonSize += "text-lg";
+        break;
+      case "medium":
+        buttonSize += "text-md";
+        break;
+      case "small":
+        buttonSize += "text-sm";
+        break;
+      default:
+        buttonSize += "text-sm";
+    }
+
     return `${defaultStyle} ${buttonStyle} ${
       icon ? "inline-flex items-center justify-between" : ""
-    } ${block ? "w-full py-4" : ""} ${disabled ? "hover:text-gray-500" : ""} ${
-      style ? style : null
-    }`;
+    } ${block ? "w-full py-4" : ""} ${disabled ? "hover:text-gray-500" : ""}
+    ${buttonSize}
+    ${style ? style : null}`;
   };
 
   return (
