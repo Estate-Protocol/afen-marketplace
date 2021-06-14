@@ -4,7 +4,7 @@ import WalletConnect from "@walletconnect/client";
 import { WalletConnectActions } from "./handlers";
 import { IAssetData } from "utils/types";
 
-export type ShopContext = {
+export type IUserContext = {
   account: any;
   balance: number;
   connectWallet: () => Promise<void>;
@@ -16,7 +16,7 @@ export type ShopContext = {
   provider: ethers.providers.Web3Provider | null;
 };
 
-export const UserContext = React.createContext<ShopContext>({
+export const UserContext = React.createContext<IUserContext>({
   account: null,
   balance: 0,
   connectWallet: () => undefined,
