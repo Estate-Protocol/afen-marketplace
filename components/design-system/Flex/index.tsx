@@ -4,6 +4,7 @@ interface FlexProps {
   spaceBetween?: boolean;
   start?: boolean;
   wrap?: boolean;
+  smAndUp?: boolean;
   children: any;
   style?: string;
   col?: boolean;
@@ -18,13 +19,14 @@ export default function Flex({
   col,
   center,
   wrap,
+  smAndUp,
 }: FlexProps) {
   return (
     <div
-      className={`flex overflow-auto w-full ${
+      className={`${smAndUp ? "md:flex" : "flex"} overflow-auto w-full ${
         start ? "items-start " : "items-end "
       }
-      ${wrap ? "flex-wrap md:flex-nowrap " : ""}
+      ${wrap ? `flex-wrap md:flex-nowrap ` : ""}
       ${spaceBetween ? "justify-between " : ""}
       ${col ? "flex-col " : ""} 
       ${center ? "items-center " : ""} 

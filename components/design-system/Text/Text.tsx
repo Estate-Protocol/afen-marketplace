@@ -2,7 +2,7 @@ import React from "react";
 import { BaseComponent } from "@/types/BaseComponent";
 
 interface TextProps extends BaseComponent {
-  size?: "small" | "x-small" | "default";
+  size?: "large" | "medium" | "small" | "x-small" | "default";
   variation?: "create" | "sub" | "";
   sub?: boolean;
   bold?: boolean;
@@ -22,6 +22,10 @@ export default function Text({
 }: TextProps) {
   const getTextSize = () => {
     switch (size) {
+      case "medium":
+        return "text-lg";
+      case "medium":
+        return "text-md";
       case "small":
         return "text-sm";
       case "x-small":
@@ -34,7 +38,7 @@ export default function Text({
   return (
     <p
       className={`tracking-tight ${getTextSize()} ${style} ${
-        sub ? "dark:text-gray-500" : ""
+        sub ? "text-gray-500" : ""
       } ${truncate && textWidth ? `truncate ${textWidth}` : ""}
       ${bold ? "font-semibold" : ""}
       `}

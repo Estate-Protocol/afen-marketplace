@@ -16,8 +16,8 @@ export default function Bid({ name, image, amount }: BidProps) {
       <div className="w-full flex items-end">
         <ListAvatar image={image}></ListAvatar>
         <div className="ml-3 w-full">
-          <Text style="text-sm text-white font-bold">{name}</Text>
-          <Text style="text-sm md:w-3/4 text-gray-400">{amount} BNB</Text>
+          <Text>{name}</Text>
+          <Text sub size="x-small">{amount} BNB</Text>
         </div>
       </div>
     </ListItem>

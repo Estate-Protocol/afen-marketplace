@@ -23,7 +23,7 @@ export default function TokenHistory({ by, date, event }: TokenHistoryProps) {
         <ListAvatar image={by.profileImage}></ListAvatar>
 
         <div className="ml-5 w-full">
-          <Text style="text-sm text-white font-bold">
+          <Text style="text-sm">
             {event} by {by.name}
           </Text>
           <Text style="text-sm md:w-3/4 text-gray-400">

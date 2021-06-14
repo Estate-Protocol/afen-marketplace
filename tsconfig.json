@@ -2,22 +2,13 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@/design-system/*": [
-        "components/design-system/*"
-      ],
-      "@/pages/*": [
-        "components/pages/*"
-      ],
-      "@/types/*": [
-        "types/*"
-      ]
+      "@/components/*": ["components/*"],
+      "@/design-system/*": ["components/design-system/*"],
+      "@/pages/*": ["components/pages/*"],
+      "@/types/*": ["types/*"]
     },
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "skipLibCheck": true,
     "sourceMap": true,
     "forceConsistentCasingInFileNames": true,
@@ -33,12 +24,7 @@
     "allowJs": true,
     "strict": false
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"],
+  "files": ["./hardhat.config.ts"]
 }

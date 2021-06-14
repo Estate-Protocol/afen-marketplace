@@ -51,7 +51,7 @@ export default function Button({
   const getButtonStyle = (): string => {
     const defaultStyle = "font-medium focus:outline-none";
 
-    let buttonStyle = "py-2 text-md ";
+    let buttonStyle = "text-md ";
     let buttonSize = "";
 
     switch (type) {

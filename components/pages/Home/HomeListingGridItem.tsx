@@ -26,7 +26,7 @@ export default function HomeListingGridItem({
         <Text
           textWidth="w-full"
           truncate
-          style="text-xl font-medium dark:text-gray-400 capitalize"
+          style="text-xl font-medium dark:text-gray-400"
         >
           {item.name}
         </Text>

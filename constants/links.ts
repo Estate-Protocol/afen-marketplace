@@ -18,10 +18,6 @@ export const userLinks = [
     label: "My profile",
     href: "/profile",
   },
-  {
-    label: "Disconnect",
-    href: "/",
-  },
 ];
 
 export const userLinksMobile = [

@@ -1,9 +1,8 @@
 import Image from "next/image";
-import Link from "@/design-system/Link";
+import Link from "next/link";
 import Button from "@/design-system/Button";
 import React, { useState } from "react";
 import UserDropdownMenu from "@/design-system/UserDropdownMenu";
-import { ethers } from "ethers";
 import { navigationLinks, userLinksMobile } from "../../constants/links";
 import data from "data";
 import { DuplicateIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
@@ -14,63 +13,26 @@ import { copyToClipboard } from "utils/misc";
 import { useRouter } from "next/router";
 import { useTheme } from "next-themes";
 import { MoonIcon, SunIcon } from "@heroicons/react/solid";
+import useUser from "hooks/useUser";
 
-export default function Header() {
-  const [accounts, setAccounts] = useState<string[] | null>(null);
-  const [balance, setBalance] = useState("0.00");
+const Header: React.FC = ({}: any) => {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [copied, setCopied] = useState(false);
 
   const router = useRouter();
   const { theme, setTheme } = useTheme();
+  const {
+    account,
+    balance,
+    connectWallet,
+    disconnectWallet,
+    mobileWalletConnect,
+  } = useUser();
 
-  const fetchUser = async () => {
-    try {
-      // @ts-ignore
-      if (window.ethereum.isConnected()) {
-        await getAccounts();
-      } else {
-        window.alert("Please install Metamask");
-      }
-    } catch (err) {
-      // TODO: use notificationo
-      window.alert("You need to allow MetaMask.");
-    }
-  };
-
-  const getAccounts = async () => {
-    // @ts-ignore
-    await window.ethereum.enable();
-
-    // @ts-ignore
-    // const provider = new ethers.providers.Web3Provider(window?.ethereum);
-    const accounts = await window.ethereum.request({
-      method: "eth_requestAccounts",
-    });
-
-    setAccounts(accounts);
-    return await getBalance();
-  };
-
-  const getBalance = async () => {
-    if (accounts) {
-      // TODO: make provider accessible across entire app
-      // @ts-ignore
-      const provider = new ethers.providers.Web3Provider(window?.ethereum);
-      let balance = await provider.getBalance(accounts[0]);
-
-      return setBalance(ethers.utils.formatEther(balance));
-    }
-  };
-
-  const connectWallet = async () => {
-    await fetchUser();
-  };
-
-  const user = accounts?.length
+  const user = account
     ? {
-        account: accounts[0],
-        balance,
+        account,
+        balance: balance.toString(),
         profileImage: data[4].image.src,
       }
     : null;
@@ -101,25 +63,23 @@ export default function Header() {
           />
         )}
       </div>
-      <div className="hidden md:block">
-        {navigationLinks.map((link) => (
-          <Link href={link.href}>
+      <div className="hidden md:flex items-center">
+        {navigationLinks.map((link, index) => (
+          <Link key={index} href={link.href}>
             <Button type="plain" style="mx-4">
               {link.label}
             </Button>
           </Link>
         ))}
-        {accounts?.length ? (
+        {account ? (
           <UserDropdownMenu
             data={user}
             walletAddressIsCopied={copied}
             onCopyWalletAddress={setCopied}
+            onDisconnectWallet={disconnectWallet}
           />
         ) : (
-          <Button
-            onClick={connectWallet} // TODO: Handle no connection
-            type="primary"
-          >
+          <Button onClick={connectWallet} type="primary">
             Connect Wallet
           </Button>
         )}
@@ -141,22 +101,31 @@ export default function Header() {
 
       {/* Mobile Menu */}
       {mobileMenu && (
-        <div className="md:hidden absolute top-16 right-0 w-screen h-screen bg-white dark:bg-rich-black z-40 px-4 md:px-10 lg:px-16 py-4">
-          <Flex col style="w-full h-full pb-16">
+        <div className="md:hidden fixed top-16 right-0 w-screen h-screen bg-black dark:bg-afen-blue bg-opacity-40 dark:bg-opacity-60">
+          <Flex
+            col
+            style="w-full bg-white dark:bg-rich-black rounded-b-3xl shadow-2xl px-4 z-40 md:px-10 lg:px-16 pt-4 pb-6"
+          >
             <div className="w-full">
               {user && (
                 <>
-                  <Flex style="mb-3 pb-4 border-b border-gray-800 overflow-hidden w-full">
-                    <div className="mr-2">
+                  <Flex
+                    start
+                    style="mb-3 pb-4 border-b dark:border-gray-800 overflow-hidden w-full"
+                  >
+                    <div className="mr-3">
                       <Image
                         src={user.profileImage}
                         layout="fixed"
-                        width="50"
-                        height="50"
+                        width="60"
+                        height="60"
                         className="rounded-full"
                       />
                     </div>
                     <div>
+                      <Text size="x-small" sub style="-mb-1">
+                        Wallet
+                      </Text>
                       <div className="inline-flex">
                         <Text textWidth="w-60" bold truncate>
                           {user.account}
@@ -175,19 +144,29 @@ export default function Header() {
                           />
                         )}
                       </div>
-                      <Text sub>{user.balance} ETH</Text>
+                      <div className="">
+                        {/* <Text size="x-small" sub style="-mb-1">
+                          Balance
+                        </Text> */}
+                        <Text bold sub>
+                          {user.balance}{" "}
+                          <span className="text-sm font-normal text-gray-600">
+                            ETH
+                          </span>
+                        </Text>
+                      </div>
                     </div>
                   </Flex>
-                  <div className="w-full text-righ mb-6">
-                    {userLinksMobile.map((link) => (
-                      <Link href={link.href}>
+                  <div className="w-full text-righ mb-3">
+                    {userLinksMobile.map((link, index) => (
+                      <Link key={index} href={link.href}>
                         <Button
                           size="large"
                           type="plain"
                           style="block"
                           onClick={() => setMobileMenu(false)}
                         >
-                          {link.label}
+                          <Text style="text-lg mb-1">{link.label}</Text>
                         </Button>
                       </Link>
                     ))}
@@ -195,14 +174,16 @@ export default function Header() {
                 </>
               )}
               <div className="w-full">
-                {navigationLinks.map((link) => (
-                  <Link href={link.href}>
+                {navigationLinks.map((link, index) => (
+                  <Link key={index} href={link.href}>
                     <Button
                       type="plain"
                       size="large"
                       onClick={() => setMobileMenu(false)}
                     >
-                      {link.label}
+                      <Text sub style="text-md">
+                        {link.label}
+                      </Text>
                     </Button>
                   </Link>
                 ))}
@@ -211,14 +192,14 @@ export default function Header() {
             <Button
               type="primary"
               block
-              style="mt-auto w-full"
+              style="mt-2 w-full"
               onClick={
                 user
                   ? () => {
                       router.push("/create");
                       setMobileMenu(false);
                     }
-                  : connectWallet
+                  : () => mobileWalletConnect.walletConnectInit()
               }
             >
               {user ? "Create" : "Connect Wallet"}
@@ -228,4 +209,6 @@ export default function Header() {
       )}
     </div>
   );
-}
+};
+
+export default Header;

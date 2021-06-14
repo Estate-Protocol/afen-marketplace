@@ -3,7 +3,7 @@ import Footer from "./Footer";
 import Head from "next/head";
 import { BaseComponent } from "@/types/BaseComponent";
 
-export default function Layout(props: BaseComponent) {
+export const Layout: React.FC = (props: BaseComponent) => {
   return (
     <div>
       <Head>
@@ -17,7 +17,7 @@ export default function Layout(props: BaseComponent) {
       </Head>
 
       {/* TODO: isAuthenticated */}
-      <Header />
+      <Header {...props} />
 
       <div className="px-1 flex flex-col justify-center align-middle min-h-screen dark:bg-afen-blue">
         {/* Body */}
@@ -28,4 +28,6 @@ export default function Layout(props: BaseComponent) {
       </div>
     </div>
   );
-}
+};
+
+export default Layout;
