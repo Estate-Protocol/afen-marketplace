@@ -1,12 +1,19 @@
 import { ethers } from "ethers";
 import React, { useState } from "react";
 import WalletConnect from "@walletconnect/client";
-import { WalletConnectActions } from "./handlers";
+import WalletConnectActions from "./WalletConnect";
 import { IAssetData } from "utils/types";
+import { User as UserData } from "./types/User";
+import { getUser } from "./api";
+
+export interface UserDetails {
+  user?: UserData | null;
+  balance: number;
+  address: string;
+}
 
 export type IUserContext = {
-  account: any;
-  balance: number;
+  user: UserDetails | null;
   connectWallet: () => Promise<void>;
   disconnectWallet: () => void;
   mobileWalletConnect: WalletConnectActions | null;
@@ -17,8 +24,7 @@ export type IUserContext = {
 };
 
 export const UserContext = React.createContext<IUserContext>({
-  account: null,
-  balance: 0,
+  user: null,
   connectWallet: () => undefined,
   disconnectWallet: () => undefined,
   mobileWalletConnect: null,
@@ -35,6 +41,7 @@ export const UserProvider: React.FC = ({ children }) => {
     null
   );
   const [assets, setAssets] = useState<IAssetData[] | null>(null);
+  const [user, setUser] = useState<UserData | null>(null);
   const [accounts, setAccounts] = useState<string[] | null>(null);
   const [address, setAddress] = useState<string | null>(null);
   const [balance, setBalance] = useState<number | null>(0);
@@ -56,6 +63,7 @@ export const UserProvider: React.FC = ({ children }) => {
   };
 
   const requestPermissions = async () => {
+    // @ts-ignore
     await window.ethereum.request({
       method: "wallet_requestPermissions",
       params: [
@@ -74,15 +82,17 @@ export const UserProvider: React.FC = ({ children }) => {
   const connectWallet = async () => {
     try {
       // @ts-ignore
-      window.ethereum
-        .enable()
-        .then(setProvider(new ethers.providers.Web3Provider(window.ethereum)));
+      window.ethereum.enable().then(
+        setProvider(
+          // @ts-ignore
+          new ethers.providers.Web3Provider(window.ethereum)
+        )
+      );
 
       setSigner(provider.getSigner());
 
       await requestPermissions();
       await getAccount();
-      await getBalance();
     } catch (err) {
       window.alert("You need to allow MetaMask.");
     }
@@ -94,7 +104,16 @@ export const UserProvider: React.FC = ({ children }) => {
       method: "eth_requestAccounts",
     });
 
-    setAddress(accounts[0]);
+    const address = accounts[0];
+
+    setAccounts(accounts);
+    setAddress(address);
+
+    if (address) {
+      const user = await getUser(address);
+      setUser(user._id ? user : null);
+    }
+
     return await getBalance();
   };
 
@@ -121,8 +140,11 @@ export const UserProvider: React.FC = ({ children }) => {
   return (
     <UserContext.Provider
       value={{
-        account: address,
-        balance,
+        user: {
+          user,
+          balance,
+          address,
+        },
         connectWallet,
         disconnectWallet,
         mobileWalletConnect: walletConnect,

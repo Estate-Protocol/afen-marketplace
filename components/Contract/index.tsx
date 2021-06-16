@@ -1,5 +1,6 @@
 import { MAIN_ABI } from "contracts/abis/Main";
 import { ethers } from "ethers";
+import useUser from "hooks/useUser";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 export type IContractContext = {
@@ -18,6 +19,8 @@ export const ContractProvider: React.FC = ({ children }) => {
   const [abi, setAbi] = useState<{ [key: string]: any }[] | null>(null);
   const [contract, setContract] = useState(null);
   const [contractSigned, setContractSigned] = useState(null);
+
+  // const { signer } = useUser();
 
   const chainAddress =
     process.env.CHAIN_ADDRESS || "0xA275f29f9B54b5b7dD6292B7A9667d27de10aC78";

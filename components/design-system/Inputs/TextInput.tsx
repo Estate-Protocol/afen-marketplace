@@ -48,7 +48,7 @@ export default function TextInput({
           min={min}
           max={max}
           className={`py-1 dark:bg-afen-blue focus:outline-none w-full ${
-            disabled ? "text-gray-600" : "text-gray-300"
+            disabled ? "text-gray-600" : "dark:text-gray-300"
           }`}
           onChange={(e) => onChange(e.target.value)}
         />

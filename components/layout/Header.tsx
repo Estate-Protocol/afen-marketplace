@@ -4,7 +4,6 @@ import Button from "@/design-system/Button";
 import React, { useState } from "react";
 import UserDropdownMenu from "@/design-system/UserDropdownMenu";
 import { navigationLinks, userLinksMobile } from "../../constants/links";
-import data from "data";
 import { DuplicateIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import Flex from "@/design-system/Flex";
 import Text from "@/design-system/Text";
@@ -22,20 +21,11 @@ const Header: React.FC = ({}: any) => {
   const router = useRouter();
   const { theme, setTheme } = useTheme();
   const {
-    account,
-    balance,
+    user: userData,
     connectWallet,
     disconnectWallet,
     mobileWalletConnect,
   } = useUser();
-
-  const user = account
-    ? {
-        account,
-        balance: balance.toString(),
-        profileImage: data[4].image.src,
-      }
-    : null;
 
   return (
     <div className="fixed w-full z-50 bg-white dark:bg-afen-blue px-4 md:px-10 lg:px-16 py-4 mx-auto border-b-2 dark:border-gray-800 flex items-center">
@@ -65,15 +55,17 @@ const Header: React.FC = ({}: any) => {
       </div>
       <div className="hidden md:flex items-center">
         {navigationLinks.map((link, index) => (
-          <Link key={index} href={link.href}>
-            <Button type="plain" style="mx-4">
-              {link.label}
-            </Button>
-          </Link>
+          <div key={index}>
+            <Link href={link.href}>
+              <Button type="plain" style="mx-4">
+                {link.label}
+              </Button>
+            </Link>
+          </div>
         ))}
-        {account ? (
+        {userData.address ? (
           <UserDropdownMenu
-            data={user}
+            data={userData}
             walletAddressIsCopied={copied}
             onCopyWalletAddress={setCopied}
             onDisconnectWallet={disconnectWallet}
@@ -107,20 +99,24 @@ const Header: React.FC = ({}: any) => {
             style="w-full bg-white dark:bg-rich-black rounded-b-3xl shadow-2xl px-4 z-40 md:px-10 lg:px-16 pt-4 pb-6"
           >
             <div className="w-full">
-              {user && (
+              {userData.address && (
                 <>
                   <Flex
                     start
                     style="mb-3 pb-4 border-b dark:border-gray-800 overflow-hidden w-full"
                   >
                     <div className="mr-3">
-                      <Image
-                        src={user.profileImage}
-                        layout="fixed"
-                        width="60"
-                        height="60"
-                        className="rounded-full"
-                      />
+                      {userData.user?.avatar ? (
+                        <Image
+                          src={userData.user?.avatar}
+                          layout="fixed"
+                          width="60"
+                          height="60"
+                          className="rounded-full"
+                        />
+                      ) : (
+                        ""
+                      )}
                     </div>
                     <div>
                       <Text size="x-small" sub style="-mb-1">
@@ -128,14 +124,14 @@ const Header: React.FC = ({}: any) => {
                       </Text>
                       <div className="inline-flex">
                         <Text textWidth="w-60" bold truncate>
-                          {user.account}
+                          {userData.address}
                         </Text>
                         {copied ? (
                           <FcCheckmark className="ml-2 h-5 w-5" />
                         ) : (
                           <DuplicateIcon
                             onClick={() =>
-                              copyToClipboard(user.account, setCopied)
+                              copyToClipboard(userData.address, setCopied)
                             }
                             className={`${
                               open ? "" : "text-opacity-70"
@@ -149,7 +145,7 @@ const Header: React.FC = ({}: any) => {
                           Balance
                         </Text> */}
                         <Text bold sub>
-                          {user.balance}{" "}
+                          {userData.balance}{" "}
                           <span className="text-sm font-normal text-gray-600">
                             ETH
                           </span>
@@ -159,33 +155,37 @@ const Header: React.FC = ({}: any) => {
                   </Flex>
                   <div className="w-full text-righ mb-3">
                     {userLinksMobile.map((link, index) => (
-                      <Link key={index} href={link.href}>
-                        <Button
-                          size="large"
-                          type="plain"
-                          style="block"
-                          onClick={() => setMobileMenu(false)}
-                        >
-                          <Text style="text-lg mb-1">{link.label}</Text>
-                        </Button>
-                      </Link>
+                      <div key={index}>
+                        <Link href={link.href}>
+                          <Button
+                            size="large"
+                            type="plain"
+                            style="block"
+                            onClick={() => setMobileMenu(false)}
+                          >
+                            <Text style="text-lg mb-1">{link.label}</Text>
+                          </Button>
+                        </Link>
+                      </div>
                     ))}
                   </div>
                 </>
               )}
               <div className="w-full">
                 {navigationLinks.map((link, index) => (
-                  <Link key={index} href={link.href}>
-                    <Button
-                      type="plain"
-                      size="large"
-                      onClick={() => setMobileMenu(false)}
-                    >
-                      <Text sub style="text-md">
-                        {link.label}
-                      </Text>
-                    </Button>
-                  </Link>
+                  <div key={index}>
+                    <Link key={index} href={link.href}>
+                      <Button
+                        type="plain"
+                        size="large"
+                        onClick={() => setMobileMenu(false)}
+                      >
+                        <Text sub style="text-md">
+                          {link.label}
+                        </Text>
+                      </Button>
+                    </Link>
+                  </div>
                 ))}
               </div>
             </div>
@@ -194,7 +194,7 @@ const Header: React.FC = ({}: any) => {
               block
               style="mt-2 w-full"
               onClick={
-                user
+                userData.address
                   ? () => {
                       router.push("/create");
                       setMobileMenu(false);
@@ -202,7 +202,7 @@ const Header: React.FC = ({}: any) => {
                   : () => mobileWalletConnect.walletConnectInit()
               }
             >
-              {user ? "Create" : "Connect Wallet"}
+              {userData.address ? "Create" : "Connect Wallet"}
             </Button>
           </Flex>
         </div>

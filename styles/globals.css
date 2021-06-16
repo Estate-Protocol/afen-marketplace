@@ -18,3 +18,7 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.react-tabs__tab--selected {
+  background: none !important;
+}

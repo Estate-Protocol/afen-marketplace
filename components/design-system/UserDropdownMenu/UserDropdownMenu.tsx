@@ -1,6 +1,5 @@
 import { Popover, Transition } from "@headlessui/react";
 import { DuplicateIcon, UserCircleIcon } from "@heroicons/react/solid";
-import Link from "next/link";
 import { Dispatch, Fragment, SetStateAction } from "react";
 import { copyToClipboard } from "utils/misc";
 import { userLinks } from "../../../constants/links";
@@ -8,14 +7,11 @@ import { FcCheckmark } from "react-icons/fc";
 import Text from "../Text";
 import Image from "next/image";
 import Button from "../Button";
+import { UserDetails } from "@/components/User";
+import Link from "next/link";
 
 interface UserDropdownMenuProps {
-  data: {
-    displayName?: string;
-    account: string;
-    balance: string;
-    profileImage?: string;
-  };
+  data: UserDetails;
   walletAddressIsCopied?: boolean;
   onCopyWalletAddress: Dispatch<SetStateAction<boolean>>;
   onDisconnectWallet: Dispatch<SetStateAction<void>>;
@@ -33,9 +29,9 @@ export default function UserDropdownMenu({
         {({ open }) => (
           <>
             <Popover.Button className={`focus:outline-none`}>
-              {data.profileImage ? (
+              {data.user?.avatar ? (
                 <div className="relative h-8 w-8 mt-1 shadow-md overflow-hidden rounded-full">
-                  <Image src={data.profileImage} layout="fill" className="" />
+                  <Image src={data.user.avatar} layout="fill" />
                 </div>
               ) : (
                 <UserCircleIcon
@@ -63,14 +59,14 @@ export default function UserDropdownMenu({
                     </Text>
                     <div className="flex mb-1.5">
                       <Text bold truncate textWidth="w-24 lg:w-48">
-                        {data.account}
+                        {data.address}
                       </Text>
                       {walletAddressIsCopied ? (
                         <FcCheckmark className="ml-2 h-5 w-5" />
                       ) : (
                         <DuplicateIcon
                           onClick={() =>
-                            copyToClipboard(data.account, onCopyWalletAddress)
+                            copyToClipboard(data.address, onCopyWalletAddress)
                           }
                           className={`${
                             open ? "" : "text-opacity-70"
@@ -92,9 +88,11 @@ export default function UserDropdownMenu({
 
                   <div className="relative px-5 py-3">
                     {userLinks.map((item, index) => (
-                      <Link href={item.href} key={index}>
-                        <Text style="mb-3 cursor-pointer">{item.label}</Text>
-                      </Link>
+                      <div key={index}>
+                        <Link href={item.href}>
+                          <Text style="mb-3 cursor-pointer">{item.label}</Text>
+                        </Link>
+                      </div>
                     ))}
                     <Button
                       type="plain"

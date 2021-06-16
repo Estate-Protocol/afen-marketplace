@@ -17,7 +17,7 @@ export default function Container({
       className={`${
         mdAndUp ? "px-0" : "px-4"
       } md:px-10 lg:px-16 mx-auto overflow-x-hidden w-full ${style} ${
-        page ? "mt-24 md:mt-32" : ""
+        page ? "mt-24 md:mt-32 mb-20" : ""
       }`}
     >
       {children}

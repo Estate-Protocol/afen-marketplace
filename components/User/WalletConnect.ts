@@ -1,10 +1,10 @@
 import WalletConnect from "@walletconnect/client";
 import QRCodeModal from "@walletconnect/qrcode-modal";
 import { IInternalEvent } from "@walletconnect/types";
-import { apiGetAccountAssets } from "utils/api";
 import { IAssetData } from "utils/types";
+import { apiGetAccountAssets } from "./api";
 
-export class WalletConnectActions {
+export default class WalletConnectActions {
   private setWalletConnector;
   private setConnected;
   private setChainId;
