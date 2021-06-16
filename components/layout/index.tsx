@@ -14,6 +14,18 @@ export const Layout: React.FC = (props: BaseComponent) => {
           content="AFEN has the objective of combining blockchain’s immutable data structure and the backing of government bodies to provide legitimacy to products"
         />
         <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="preload"
+          href="/fonts/Manrope/Manrope-Regular.ttf"
+          as="font"
+          crossOrigin=""
+        />
+        <link
+          rel="preload"
+          href="/fonts/Manrope/Manrope-Medium.ttf"
+          as="font"
+          crossOrigin=""
+        />
       </Head>
 
       {/* TODO: isAuthenticated */}
