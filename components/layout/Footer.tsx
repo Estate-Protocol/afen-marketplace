@@ -122,7 +122,7 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-        <div className="text-center border-t-2 dark:border-gray-800 pt-10 md:pt-20 pb-10 md:pb-0 inline-flex md:justify-center w-full mx-auto">
+        <div className="text-center border-t-2 dark:border-gray-800 pt-10 md:pt-20 pb-0 inline-flex md:justify-center w-full mx-auto">
           <a
             href="https://www.instagram.com/afenblockchain/"
             target="_blank"

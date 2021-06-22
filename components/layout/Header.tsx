@@ -33,9 +33,9 @@ const Header: React.FC = ({}: any) => {
         <Link href="/">
           <a className="flex items-center" onClick={() => setMobileMenu(false)}>
             <Image src="/logo.png" width="30" height="30" />
-            <p className="ml-1 md:ml-2 font-weight-medium text-xl text-black dark:text-white tracking-tight">
+            <h1 className="font-medium text-lg md:text-xl ml-2 tracking-tight">
               Marketplace
-            </p>
+            </h1>
           </a>
         </Link>
       </div>
@@ -43,7 +43,7 @@ const Header: React.FC = ({}: any) => {
       <div className="ml-auto border-r-2 dark:border-gray-700 pr-2 md:pr-4">
         {theme === "dark" ? (
           <SunIcon
-            className="h-6 cursor-pointer text-yellow-200"
+            className="h-6 cursor-pointer"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
           />
         ) : (

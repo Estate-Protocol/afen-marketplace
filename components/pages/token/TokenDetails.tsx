@@ -43,31 +43,31 @@ export default function TokenDetails({
         </div>
       </div> */}
 
-      <div className="my-5">
-        <Text size="x-small" style="text-gray-400">
+      <div className="my-3 md:my-5">
+        <Text size="x-small" sub bold>
           Royalty
         </Text>
-        <Text size="small">10%</Text>
+        <Text>10%</Text>
       </div>
 
-      <div className="my-5">
-        <Text size="x-small" style="text-gray-400">
+      <div className="my-3 md:my-5">
+        <Text size="x-small" sub bold>
           Medium
         </Text>
-        <Text size="small">Oil on canvas</Text>
+        <Text>Oil on canvas</Text>
       </div>
 
-      <div className="my-5">
-        <Text size="x-small" style="text-gray-400">
+      <div className="my-3 md:my-5">
+        <Text size="x-small" sub bold>
           Dimension
         </Text>
-        <Text size="small">
+        <Text>
           {dimensions?.depth} × {dimensions?.width} cm × {dimensions?.height} cm
         </Text>
       </div>
 
-      <div className="flex mt-8 border-t-2 border-gray-800">
-        <div className="w-full flex mt-8 items-start">
+      {/* <div className="flex mt-4 md:mt-8 border-t-2 dark:border-gray-800">
+        <div className="w-full flex mt-4 md:mt-8">
           <ListAvatar image={owner.image}></ListAvatar>
           <div className="ml-2 w-full">
             <Text style="text-sm text-white font-light text-gray-400">
@@ -91,7 +91,7 @@ export default function TokenDetails({
             <Text style="text-sm md:w-3/4">Creator</Text>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

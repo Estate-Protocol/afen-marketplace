@@ -10,14 +10,17 @@ export interface BidProps {
   time?: Date | string;
 }
 
-export default function Bid({ name, image, amount }: BidProps) {
+export default function TokenBid({ name, image, amount }: BidProps) {
   return (
     <ListItem>
-      <div className="w-full flex items-end">
+      <div className="flex items-start">
         <ListAvatar image={image}></ListAvatar>
-        <div className="ml-3 w-full">
-          <Text>{name}</Text>
-          <Text sub size="x-small">{amount} BNB</Text>
+        <div className="ml-2">
+          <Text size="medium" bold>{amount} BNB</Text>
+          <Text style="mt-1 sm:mt-0">{name}</Text>
+          <Text sub size="x-small">
+            June 16, 2021 10:12 PM
+          </Text>
         </div>
       </div>
     </ListItem>

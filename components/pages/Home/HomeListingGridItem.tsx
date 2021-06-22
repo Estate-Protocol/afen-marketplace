@@ -16,7 +16,7 @@ export default function HomeListingGridItem({
 }: HomeListingGridItemProps) {
   return (
     <div
-      className={`cursor-pointer shadow-sm border-2 border-light-blue-500 dark:border-gray-700 overflow-hidden rounded-xl ${
+      className={`cursor-pointer border bg-gray-500 border-light-blue-500 dark:border-gray-700 overflow-hidden rounded-xl ${
         width ? width : "w-auto"
       }`}
       onClick={onClick}
@@ -30,7 +30,14 @@ export default function HomeListingGridItem({
         >
           {item.name}
         </Text>
-        <Text style="text-base">
+        <Flex style="mb-3 mt-1">
+          <CardAvatar image={item.owner.profileImage} />
+          <Text size="x-small" style="text-gray-500">
+            {item.owner.name}
+          </Text>
+        </Flex>
+
+        <Text style="font-semibold">
           {item.price} BNB
           {item.auction && item.bids.length && (
             <span className="text-gray-700 dark:text-gray-50 text-xs ml-1">
@@ -41,11 +48,6 @@ export default function HomeListingGridItem({
         {/* <Text textWidth="w-full" truncate sub size="x-small">
           {item.description}
         </Text> */}
-
-        <Flex style="mt-6 md:mt-4">
-          <CardAvatar image={item.owner.profileImage} />
-          <Text style="text-base text-gray-500">{item.owner.name}</Text>
-        </Flex>
       </CardText>
     </div>
   );

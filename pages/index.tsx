@@ -1,17 +1,13 @@
 import Container from "@/design-system/Container";
-import Flex from "@/design-system/Flex";
 import arts from "../data";
-import { useRouter } from "next/router";
 import TabsComponent from "@/design-system/Tab";
 import ListingSectionHeader from "@/design-system/ListingSectionHeader";
-import HomeListingGrid, { HomeListingGridItem } from "@/pages/Home";
+import HomeListingGrid from "@/pages/Home";
 
 export default function Home() {
-  const router = useRouter();
-
   return (
     <Container page>
-      <div className="mb-10">
+      {/* <div className="mb-10">
         <ListingSectionHeader
           title="AFEN x ConservatioNFT: Preserving Nature"
           subTitle="Ends Jun 3 at 8:00pm +04"
@@ -31,11 +27,12 @@ export default function Home() {
               )
           )}
         </Flex>
-      </div>
+      </div> */}
 
-      <div className="mt-20 mb-10">
+      <div className="mb-10">
         <ListingSectionHeader title="Explore" />
-        <TabsComponent
+        <HomeListingGrid data={arts} />
+        {/* <TabsComponent
           tabs={[
             {
               title: "All",
@@ -52,7 +49,7 @@ export default function Home() {
               disabled: true,
             },
           ]}
-        />
+        /> */}
       </div>
     </Container>
   );

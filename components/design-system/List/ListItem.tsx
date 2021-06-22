@@ -10,7 +10,7 @@ export interface ListItemProps extends BaseComponent {
 export default function ListItem({ children, hover, onClick }: ListItemProps) {
   return (
     <li
-      className={`list-none py-2 mb-2 rounded-md ${
+      className={`list-none pb-3 mb-3 border-b dark:border-gray-700 ${
         hover || onClick ? "px-2 hover:bg-afen-blue-light cursor-pointer" : ""
       } `}
       onClick={onClick}

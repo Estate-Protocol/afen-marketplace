@@ -26,7 +26,13 @@ export default function TokenPageTabs({
           },
           {
             title: "Bids",
-            body: bids?.map((bid) => <Bid {...bid} />),
+            body: (
+              <div className="h-96 overflow-scroll">
+                {bids?.map((bid) => (
+                  <Bid {...bid} />
+                ))}
+              </div>
+            ),
           },
           {
             title: "History",

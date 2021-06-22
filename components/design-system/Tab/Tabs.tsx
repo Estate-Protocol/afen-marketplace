@@ -18,16 +18,15 @@ export default function TabsComponent({ tabs }: TabsComponentProps) {
       className="mt-3"
       selectedIndex={tabIndex}
       onSelect={(index) => setTabIndex(index)}
-      
     >
       <TabList className="border-none bg-opacity-100">
         {tabs.map(({ title, disabled }, index) => (
           <Tab
             disabled={disabled}
             key={index}
-            className={`text-gray-400 list-none inline-block pr-5 mr-8 cursor-pointer dark:focus:text-white pb-1 transition-colors duration-75 ease-linear text-sm ${
+            className={`text-gray-400 list-none inline-block pr-5 mr-8 cursor-pointer dark:focus:text-white pb-1 transition-colors duration-75 ease-linear text-sm focus:outline-none font-bold ${
               tabIndex === index
-                ? "dark:text-afen-yellow border-b border-black dark:border-afen-yellow"
+                ? "dark:text-afen-yellow border-b-2 border-black dark:border-afen-yellow"
                 : ""
             }`}
           >

@@ -49,7 +49,7 @@ export default function Button({
   onFocus,
 }: ButtonProps) {
   const getButtonStyle = (): string => {
-    const defaultStyle = "font-medium focus:outline-none";
+    const defaultStyle = "font-bold focus:outline-none";
 
     let buttonStyle = "text-md ";
     let buttonSize = "";
@@ -57,7 +57,7 @@ export default function Button({
     switch (type) {
       case ButtonType.PRIMARY:
         buttonStyle +=
-          "px-5 py-2 rounded-md bg-afen-yellow text-black focus:outline-none";
+          "px-6 py-2 rounded-full bg-afen-yellow text-black focus:outline-none";
         break;
       case ButtonType.SECONDARY:
         buttonStyle +=
