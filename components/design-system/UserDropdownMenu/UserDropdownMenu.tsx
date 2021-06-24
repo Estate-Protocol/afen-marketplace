@@ -8,7 +8,7 @@ import Text from "../Text";
 import Image from "next/image";
 import Button from "../Button";
 import { UserDetails } from "@/components/User";
-import Link from "next/link";
+import { useRouter } from "next/router";
 
 interface UserDropdownMenuProps {
   data: UserDetails;
@@ -23,6 +23,8 @@ export default function UserDropdownMenu({
   onCopyWalletAddress,
   onDisconnectWallet,
 }: UserDropdownMenuProps) {
+  const router = useRouter();
+
   return (
     <div className="inline-block">
       <Popover className="relative">
@@ -81,7 +83,7 @@ export default function UserDropdownMenu({
                       </Text>
                       <Text bold>
                         {data.balance}{" "}
-                        <span className="text-sm text-gray-600">ETH</span>
+                        <span className="text-sm text-gray-600">BNB</span>
                       </Text>
                     </div>
                   </div>
@@ -89,9 +91,13 @@ export default function UserDropdownMenu({
                   <div className="relative px-5 py-3">
                     {userLinks.map((item, index) => (
                       <div key={index}>
-                        <Link href={item.href}>
-                          <Text style="mb-3 cursor-pointer">{item.label}</Text>
-                        </Link>
+                        <Button
+                          type="plain"
+                          style="py-0"
+                          onClick={() => router.push(item.href)}
+                        >
+                          <Text style="mb-3 font-normal">{item.label}</Text>
+                        </Button>
                       </div>
                     ))}
                     <Button

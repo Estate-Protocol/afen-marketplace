@@ -12,7 +12,7 @@ export default function ConnectWalletPage() {
   const { user, connectWallet } = useUser();
 
   return (
-    <Container page style="md:w-1/3 mx-auto">
+    <Container page style="md:w-2/3 lg:w-2/5 mx-auto">
       <div className="my-24">
         <Title>Connect Your Wallet</Title>
         <Image

@@ -15,6 +15,7 @@ interface ButtonProps extends BaseComponent {
   size?: "small" | "medium" | "large";
   variant?: "add" | "delete";
   hover?: boolean;
+  inputType?: "button" | "submit" | "reset";
   icon?: boolean;
   plain?: boolean;
   block?: boolean;
@@ -40,6 +41,7 @@ export default function Button({
   children,
   style,
   size,
+  inputType,
   type = "primary",
   hover = true,
   icon,
@@ -49,7 +51,7 @@ export default function Button({
   onFocus,
 }: ButtonProps) {
   const getButtonStyle = (): string => {
-    const defaultStyle = "font-bold focus:outline-none";
+    const defaultStyle = "font-semibold focus:outline-none";
 
     let buttonStyle = "text-md ";
     let buttonSize = "";
@@ -77,7 +79,7 @@ export default function Button({
 
     switch (size) {
       case "large":
-        buttonSize += "text-lg";
+        buttonSize += "text-lg px-10";
         break;
       case "medium":
         buttonSize += "text-md";
@@ -91,13 +93,22 @@ export default function Button({
 
     return `${defaultStyle} ${buttonStyle} ${
       icon ? "inline-flex items-center justify-between" : ""
-    } ${block ? "w-full py-4" : ""} ${disabled ? "hover:text-gray-500" : ""}
+    } ${block ? "w-full py-4" : ""} ${
+      disabled
+        ? "text-gray-500 bg-opacity-80 hover:text-gray-500 cursor-default"
+        : ""
+    }
     ${buttonSize}
     ${style ? style : null}`;
   };
 
   return (
-    <button className={getButtonStyle()} onClick={onClick} onFocus={onFocus}>
+    <button
+      className={getButtonStyle()}
+      onClick={onClick}
+      onFocus={onFocus}
+      type={inputType}
+    >
       {children}
     </button>
   );

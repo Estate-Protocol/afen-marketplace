@@ -14,6 +14,7 @@ export interface UserDetails {
 
 export type IUserContext = {
   user: UserDetails | null;
+  getUser: (wallet: string) => Promise<UserData>;
   connectWallet: () => Promise<void>;
   disconnectWallet: () => void;
   mobileWalletConnect: WalletConnectActions | null;
@@ -25,6 +26,7 @@ export type IUserContext = {
 
 export const UserContext = React.createContext<IUserContext>({
   user: null,
+  getUser: () => undefined,
   connectWallet: () => undefined,
   disconnectWallet: () => undefined,
   mobileWalletConnect: null,
@@ -97,11 +99,39 @@ export const UserProvider: React.FC = ({ children }) => {
       window.alert("You need to allow MetaMask.");
     }
   };
-
+  
   const getAccount = async () => {
     // @ts-ignore
     const accounts = await window.ethereum.request({
       method: "eth_requestAccounts",
+    });
+    // @ts-ignore
+    const bscChange = await window.ethereum.request({
+      method: "wallet_addEthereumChain",
+      params: [
+        // {
+        //   chainId: '0x38',
+        //   chainName: 'BSC Mainnet',
+        //   nativeCurrency: {
+        //       name: 'BSCMainnet',
+        //       symbol: 'BNB',
+        //       decimals: 18
+        //   },
+        //   rpcUrls: ['https://bsc-dataseed.binance.org'],
+        //   blockExplorerUrls: ['https://bscscan.com']
+        // }
+        {
+          chainId: "0x61",
+          chainName: "BSC Testnet",
+          nativeCurrency: {
+            name: "BSCTestnet",
+            symbol: "BNB",
+            decimals: 18,
+          },
+          rpcUrls: ["https://data-seed-prebsc-1-s1.binance.org:8545/"],
+          blockExplorerUrls: ["https://testnet.bscscan.com"],
+        },
+      ],
     });
 
     const address = accounts[0];
@@ -111,7 +141,7 @@ export const UserProvider: React.FC = ({ children }) => {
 
     if (address) {
       const user = await getUser(address);
-      setUser(user._id ? user : null);
+      setUser(user);
     }
 
     return await getBalance();
@@ -135,8 +165,6 @@ export const UserProvider: React.FC = ({ children }) => {
     resetApp
   );
 
-  // provider.on("accountsChanged", getAccount);
-
   return (
     <UserContext.Provider
       value={{
@@ -145,6 +173,7 @@ export const UserProvider: React.FC = ({ children }) => {
           balance,
           address,
         },
+        getUser,
         connectWallet,
         disconnectWallet,
         mobileWalletConnect: walletConnect,

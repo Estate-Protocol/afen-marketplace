@@ -1,5 +1,13 @@
 export const navigationLinks = [
   {
+    label: "Marketplace",
+    href: "/",
+  },
+  {
+    label: "Resources",
+    href: "/",
+  },
+  {
     label: "Get Started",
     href: "/",
   },

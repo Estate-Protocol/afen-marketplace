@@ -13,7 +13,7 @@ interface TextInput {
   required?: boolean;
   min?: number;
   max?: number;
-  prepend?: string;
+  prepend?: ReactNode | string;
   onChange?: (text: any) => void;
 }
 
@@ -34,7 +34,7 @@ export default function TextInput({
   return (
     <div className="mb-5 w-full">
       <label htmlFor={slugifyText(label)}>
-        <Text>{label}</Text>
+        <Text sub size="small">{label}</Text>
       </label>
       <div className="inline-flex items-center w-full mt-2 border-b border-gray-500">
         {icon}
@@ -52,9 +52,9 @@ export default function TextInput({
           }`}
           onChange={(e) => onChange(e.target.value)}
         />
-        <Text sub style="ml-2">
+        <div className="ml-2">
           {prepend}
-        </Text>
+        </div>
       </div>
       {description && (
         <Text sub size="x-small" style="mt-2">

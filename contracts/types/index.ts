@@ -2,35 +2,25 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { AfenNft } from "./AfenNft";
-export type { Afen } from "./Afen";
-export type { AfenToken } from "./AfenToken";
 export type { ERC1155 } from "./ERC1155";
 export type { ERC165 } from "./ERC165";
-export type { FakeAfenToken } from "./FakeAfenToken";
-export type { FakeBscToken } from "./FakeBscToken";
 export type { IERC1155 } from "./IERC1155";
 export type { IERC1155MetadataURI } from "./IERC1155MetadataURI";
 export type { IERC1155Receiver } from "./IERC1155Receiver";
 export type { IERC165 } from "./IERC165";
-export type { Main } from "./Main";
-export type { Migrations } from "./Migrations";
-export type { Mint } from "./Mint";
-export type { Owner } from "./Owner";
-export type { Trade } from "./Trade";
+export type { IToken } from "./IToken";
+export type { Nft } from "./Nft";
+export type { Ownable } from "./Ownable";
+export type { Token } from "./Token";
 
 export { AfenNft__factory } from "./factories/AfenNft__factory";
-export { Afen__factory } from "./factories/Afen__factory";
-export { AfenToken__factory } from "./factories/AfenToken__factory";
 export { ERC1155__factory } from "./factories/ERC1155__factory";
 export { ERC165__factory } from "./factories/ERC165__factory";
-export { FakeAfenToken__factory } from "./factories/FakeAfenToken__factory";
-export { FakeBscToken__factory } from "./factories/FakeBscToken__factory";
 export { IERC1155__factory } from "./factories/IERC1155__factory";
 export { IERC1155MetadataURI__factory } from "./factories/IERC1155MetadataURI__factory";
 export { IERC1155Receiver__factory } from "./factories/IERC1155Receiver__factory";
 export { IERC165__factory } from "./factories/IERC165__factory";
-export { Main__factory } from "./factories/Main__factory";
-export { Migrations__factory } from "./factories/Migrations__factory";
-export { Mint__factory } from "./factories/Mint__factory";
-export { Owner__factory } from "./factories/Owner__factory";
-export { Trade__factory } from "./factories/Trade__factory";
+export { IToken__factory } from "./factories/IToken__factory";
+export { Nft__factory } from "./factories/Nft__factory";
+export { Ownable__factory } from "./factories/Ownable__factory";
+export { Token__factory } from "./factories/Token__factory";

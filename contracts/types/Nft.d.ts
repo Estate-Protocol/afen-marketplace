@@ -20,7 +20,7 @@ import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
 
-interface AfenNftInterface extends ethers.utils.Interface {
+interface NftInterface extends ethers.utils.Interface {
   functions: {
     "a_tk()": FunctionFragment;
     "balanceOf(address,uint256)": FunctionFragment;
@@ -36,6 +36,7 @@ interface AfenNftInterface extends ethers.utils.Interface {
     "uri(uint256)": FunctionFragment;
     "withdrawBnb()": FunctionFragment;
     "create_nft(string,uint256,uint256)": FunctionFragment;
+    "get_nft_list_size()": FunctionFragment;
     "get_nft(uint256)": FunctionFragment;
     "mint_fee(uint256)": FunctionFragment;
     "mint(uint256,uint256,uint256)": FunctionFragment;
@@ -90,6 +91,10 @@ interface AfenNftInterface extends ethers.utils.Interface {
   encodeFunctionData(
     functionFragment: "create_nft",
     values: [string, BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "get_nft_list_size",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "get_nft",
@@ -157,6 +162,10 @@ interface AfenNftInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "create_nft", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "get_nft_list_size",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "get_nft", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "mint_fee", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
@@ -179,7 +188,7 @@ interface AfenNftInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: "URI"): EventFragment;
 }
 
-export class AfenNft extends BaseContract {
+export class Nft extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
@@ -220,7 +229,7 @@ export class AfenNft extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TypedEvent<EventArgsArray & EventArgsObject>>>;
 
-  interface: AfenNftInterface;
+  interface: NftInterface;
 
   functions: {
     a_tk(overrides?: CallOverrides): Promise<[string]>;
@@ -328,6 +337,8 @@ export class AfenNft extends BaseContract {
       b_price: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    get_nft_list_size(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     get_nft(
       id: BigNumberish,
@@ -478,6 +489,8 @@ export class AfenNft extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  get_nft_list_size(overrides?: CallOverrides): Promise<BigNumber>;
+
   get_nft(
     id: BigNumberish,
     overrides?: CallOverrides
@@ -614,6 +627,8 @@ export class AfenNft extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    get_nft_list_size(overrides?: CallOverrides): Promise<BigNumber>;
+
     get_nft(
       id: BigNumberish,
       overrides?: CallOverrides
@@ -636,7 +651,7 @@ export class AfenNft extends BaseContract {
       amount: BigNumberish,
       tk_id: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<void>;
+    ): Promise<BigNumber>;
 
     buy_fee(price: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -816,6 +831,8 @@ export class AfenNft extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    get_nft_list_size(overrides?: CallOverrides): Promise<BigNumber>;
+
     get_nft(id: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
     mint_fee(
@@ -952,6 +969,8 @@ export class AfenNft extends BaseContract {
       b_price: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
+
+    get_nft_list_size(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     get_nft(
       id: BigNumberish,

@@ -16,7 +16,7 @@ export default function HomeListingGridItem({
 }: HomeListingGridItemProps) {
   return (
     <div
-      className={`cursor-pointer border bg-gray-500 border-light-blue-500 dark:border-gray-700 overflow-hidden rounded-xl ${
+      className={`cursor-pointer bg-gray-500 border dark:border-gray-700 overflow-hidden rounded-xl ${
         width ? width : "w-auto"
       }`}
       onClick={onClick}

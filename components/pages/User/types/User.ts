@@ -4,7 +4,7 @@ export interface UserProfile {
   lastName?: string;
   fullName?: string;
   email?: string;
-  instragram?: SocialLink;
+  instagram?: SocialLink;
   twitter?: SocialLink;
   portfolio?: string;
   description?: string;

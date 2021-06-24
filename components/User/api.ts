@@ -4,12 +4,15 @@ import { User } from "./types/User";
 
 export async function getUser(address: string): Promise<User> {
   const response = await api.get(`/user/${address}`);
-  const { result } = response.data;
-  return result;
+  return response.data?.user;
 }
 
 export async function createUser(data: User): Promise<User> {
-  const response = await api.post("/user/register", JSON.stringify(data));
+  const response = await api.post("/user/register", JSON.stringify(data), {
+    headers: {
+      "content-type": "multipart/form-data",
+    },
+  });
   const { result } = response.data;
   return result;
 }

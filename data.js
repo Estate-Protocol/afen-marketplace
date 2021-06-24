@@ -1,27 +1,26 @@
 export default [
   {
     id: "69126c24-588e-5aa4-8698-bb1ac5cd6e7f",
-    name: "Lina Hampton",
+    name: "Ethos",
     verified: "afen",
     description:
-      "Qui veniam labore ea irure ex. Irure velit tempor et culpa sint mollit magna sunt ea duis eiusmod. Ea anim magna occaecat dolor deserunt mollit.Consequat deserunt do sit eiusmod fugiat deserunt mollit culpa minim. Veniam mollit sint excepteur qui eu aute dolor non Lorem enim. Commodo tempor dolor tempor enim laborum et sint dolor ullamco ipsum officia voluptate laborum.",
+      "\"Ethos\" is metaphoric display of the mind, psyche and perception of a family. This painting conscientiously renders the rubik's cube and dice to tell the story of the smallest unit of the society. The mind of the Man is depicted as a rubik's cube which insinuates that He has a sophisticated approach to life.  He is apt, intelligent, patient and specialises in finding solutions to problems. Sometimes,  He becomes a puzzle to solve as it takes a measure of patience and knowledge to discern him. The Woman is expressed as a dice. This infers that she plays the game of luck. She is a risk taker. She embraces the results of her efforts. Somedays,  she is a winner while other days she looses.  She has so many sides to her. She can be full of surprises. So unpredictable and gambles her way in and out of challenges. The children are portrayed with eclectic minds. The daughter ultimately picks the major traits of the mother but has some characteristics of the father while the Son reveals major traits of the father but picks some traits from the mother. This is the echos of a family.",
     governmentAuthority: "Ekiti, Nigeria",
     hightestBid: 2.9,
     price: 2.37,
     auction: true,
     expires: "",
     owner: {
-      name: "Curtis Flores",
+      name: "Akintayo Akintobi",
       description:
         "Nisi sint aliqua ex sint sunt veniam veniam. Anim tempor qui quis irure. Fugiat amet velit tempor anim.",
-      profileImage:
-        "https://media.giphy.com/media/vwjfBggP3Q5vEdTx9H/giphy.gif",
+      profileImage: "/four.jpg",
     },
     created: "8/3/2021",
     royalty: 10,
     likes: 10,
     image: {
-      src: "https://images.unsplash.com/photo-1563995103864-d87d3c1fdd39?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGFmcmljYW4lMjBhcnR8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
+      src: "/one.jpg",
       alt: "Art",
     },
     bids: [
@@ -37,7 +36,7 @@ export default [
   },
   {
     id: "f0d75833-37fa-5f55-b4ee-3ac13126fe95",
-    name: "Bruce Mathis",
+    name: "Ethos Two",
     verified: "afen",
     description:
       "Culpa aliqua irure cillum aliqua cupidatat occaecat ullamco. Deserunt adipisicing laboris nulla nisi. Eiusmod culpa anim commodo magna culpa irure proident amet magna ipsum nulla minim.",
@@ -47,17 +46,16 @@ export default [
     auction: false,
     expires: "",
     owner: {
-      name: "Curtis Flores",
+      name: "Akintayo Akintobi",
       description:
         "Eiusmod occaecat officia ut minim voluptate voluptate dolore nulla commodo anim. Nisi excepteur laborum pariatur elit culpa ut fugiat labore tempor minim laboris voluptate. Laboris eu consectetur amet laboris amet quis reprehenderit nisi fugiat.",
-      profileImage:
-        "https://media.giphy.com/media/yDe13oXmaBmvuyJaPj/giphy.gif",
+      profileImage: "/four.jpg",
     },
     created: "9/4/2021",
     royalty: 10,
     likes: 10,
     image: {
-      src: "https://media.giphy.com/media/QAO5e1GbF9kLKDjqlI/giphy.gif",
+      src: "/two.jpg",
       alt: "Art",
     },
     bids: [
@@ -73,7 +71,7 @@ export default [
   },
   {
     id: "583016f7-21dd-58f1-af9e-2234e878588f",
-    name: "Sally Williamson",
+    name: "Ethos Three",
     verified: "afen",
     description:
       "Proident laboris aliqua proident amet sint non ullamco. Deserunt aliqua incididunt culpa id magna do irure mollit id. Sint aliqua aliquip exercitation ad elit qui sunt commodo cupidatat commodo ad est duis.",
@@ -83,17 +81,16 @@ export default [
     auction: false,
     expires: "",
     owner: {
-      name: "Curtis Flores",
+      name: "Akintayo Akintobi",
       description:
         "Ea nostrud enim exercitation dolor. Pariatur enim non veniam reprehenderit sunt. Nisi sunt fugiat consequat adipisicing amet anim eu sunt commodo laborum est qui officia tempor.",
-      profileImage:
-        "https://media.giphy.com/media/yDe13oXmaBmvuyJaPj/giphy.gif",
+      profileImage: "/four.jpg",
     },
     created: "8/9/2021",
     royalty: 10,
     likes: 10,
     image: {
-      src: "https://media.giphy.com/media/l3vRg13bg9FdLYK8E/giphy.gif",
+      src: "/three.jpg",
       alt: "Art",
     },
     bids: [
@@ -119,17 +116,16 @@ export default [
     auction: false,
     expires: "",
     owner: {
-      name: "Curtis Flores",
+      name: "Oiza Alonge",
       description:
         "Anim ullamco adipisicing sit ex aliquip proident nulla ea duis. Et commodo consequat ea ullamco aliqua est voluptate. Excepteur proident exercitation ad esse exercitation.",
-      profileImage:
-        "https://media.giphy.com/media/yDe13oXmaBmvuyJaPj/giphy.gif",
+      profileImage: "/seven.jpg",
     },
     created: "1/26/2121",
     royalty: 10,
     likes: 10,
     image: {
-      src: "https://images.unsplash.com/photo-1515658323406-25d61c141a6e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8YWZyaWNhbnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
+      src: "/five.jpg",
       alt: "Art",
     },
     bids: [
@@ -155,17 +151,16 @@ export default [
     auction: true,
     expires: "",
     owner: {
-      name: "Lola",
+      name: "Oiza Alonge",
       description:
         "Sint officia adipisicing quis incididunt exercitation ea cupidatat culpa cupidatat. Duis in mollit incididunt sit laboris pariatur dolor. Aliqua Lorem incididunt consectetur aliquip labore elit ad.",
-      profileImage:
-        "https://media.giphy.com/media/vwjfBggP3Q5vEdTx9H/giphy.gif",
+      profileImage: "/seven.jpg",
     },
     created: "1/30/2121",
     royalty: 10,
     likes: 10,
     image: {
-      src: "https://media.giphy.com/media/28Nev3k184A9PdSDCg/giphy.gif",
+      src: "/six.jpg",
       alt: "Art",
     },
     bids: [
@@ -302,8 +297,7 @@ export default [
       name: "Curtis Flores",
       description:
         "Consequat irure irure non elit commodo dolore fugiat. Deserunt eu laboris deserunt sint cillum minim ipsum ad. Aute magna et aute deserunt minim nisi ex in occaecat veniam.",
-      profileImage:
-        "https://media.giphy.com/media/vwjfBggP3Q5vEdTx9H/giphy.gif",
+      profileImage: "/four.jpg",
     },
     created: "1/4/2021",
     royalty: 10,
@@ -375,8 +369,7 @@ export default [
       name: "Curtis Flores",
       description:
         "Minim do nisi voluptate sit sit cupidatat commodo elit cupidatat nulla duis. Amet ullamco nisi et magna est veniam reprehenderit adipisicing duis do voluptate cillum cupidatat deserunt. Velit occaecat reprehenderit culpa ipsum ipsum occaecat proident.",
-      profileImage:
-        "https://media.giphy.com/media/vwjfBggP3Q5vEdTx9H/giphy.gif",
+      profileImage: "/four.jpg",
     },
     created: "2/7/2021",
     royalty: 10,

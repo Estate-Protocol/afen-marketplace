@@ -1,51 +1,19 @@
 export const AFEN_NFT_ABI = [
   {
-    inputs: [],
-    stateMutability: "nonpayable",
-    type: "constructor",
-  },
-  {
-    anonymous: false,
     inputs: [
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "_id",
-        type: "uint256",
-      },
-      {
-        indexed: false,
         internalType: "string",
-        name: "_hash",
+        name: "_uri",
         type: "string",
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "_aprice",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "_bprice",
-        type: "uint256",
-      },
-      {
-        indexed: false,
         internalType: "address",
-        name: "_creator",
+        name: "a_tk_addr",
         type: "address",
       },
-      {
-        indexed: false,
-        internalType: "bool",
-        name: "_sell",
-        type: "bool",
-      },
     ],
-    name: "AddedSell",
-    type: "event",
+    stateMutability: "nonpayable",
+    type: "constructor",
   },
   {
     anonymous: false,
@@ -76,37 +44,19 @@ export const AFEN_NFT_ABI = [
     anonymous: false,
     inputs: [
       {
-        indexed: false,
-        internalType: "string",
-        name: "_hash",
-        type: "string",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "_aprice",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "_bprice",
-        type: "uint256",
-      },
-      {
-        indexed: false,
+        indexed: true,
         internalType: "address",
-        name: "_creator",
+        name: "previousOwner",
         type: "address",
       },
       {
-        indexed: false,
-        internalType: "bool",
-        name: "_sell",
-        type: "bool",
+        indexed: true,
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
       },
     ],
-    name: "Minted",
+    name: "OwnershipTransferred",
     type: "event",
   },
   {
@@ -203,6 +153,19 @@ export const AFEN_NFT_ABI = [
     type: "event",
   },
   {
+    inputs: [],
+    name: "a_tk",
+    outputs: [
+      {
+        internalType: "contract IToken",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -225,7 +188,6 @@ export const AFEN_NFT_ABI = [
     ],
     stateMutability: "view",
     type: "function",
-    constant: true,
   },
   {
     inputs: [
@@ -250,7 +212,6 @@ export const AFEN_NFT_ABI = [
     ],
     stateMutability: "view",
     type: "function",
-    constant: true,
   },
   {
     inputs: [
@@ -275,7 +236,26 @@ export const AFEN_NFT_ABI = [
     ],
     stateMutability: "view",
     type: "function",
-    constant: true,
+  },
+  {
+    inputs: [],
+    name: "owner",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "renounceOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
     inputs: [
@@ -379,7 +359,19 @@ export const AFEN_NFT_ABI = [
     ],
     stateMutability: "view",
     type: "function",
-    constant: true,
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
+    ],
+    name: "transferOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
     inputs: [
@@ -399,18 +391,16 @@ export const AFEN_NFT_ABI = [
     ],
     stateMutability: "view",
     type: "function",
-    constant: true,
   },
   {
     stateMutability: "payable",
     type: "receive",
-    payable: true,
   },
   {
     inputs: [],
-    name: "withdraw",
+    name: "withdrawBnb",
     outputs: [],
-    stateMutability: "nonpayable",
+    stateMutability: "payable",
     type: "function",
   },
   {
@@ -422,28 +412,17 @@ export const AFEN_NFT_ABI = [
       },
       {
         internalType: "uint256",
-        name: "_aprice",
+        name: "a_price",
         type: "uint256",
       },
       {
         internalType: "uint256",
-        name: "_bprice",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "_amount",
+        name: "b_price",
         type: "uint256",
       },
     ],
-    name: "mint",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
+    name: "create_nft",
+    outputs: [],
     stateMutability: "nonpayable",
     type: "function",
   },
@@ -451,11 +430,45 @@ export const AFEN_NFT_ABI = [
     inputs: [
       {
         internalType: "uint256",
-        name: "_amount",
+        name: "id",
         type: "uint256",
       },
     ],
-    name: "calc_fee",
+    name: "get_nft",
+    outputs: [
+      {
+        internalType: "string",
+        name: "_hash",
+        type: "string",
+      },
+      {
+        internalType: "uint256",
+        name: "a_price",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "b_price",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "creator",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "price",
+        type: "uint256",
+      },
+    ],
+    name: "mint_fee",
     outputs: [
       {
         internalType: "uint256",
@@ -465,49 +478,94 @@ export const AFEN_NFT_ABI = [
     ],
     stateMutability: "pure",
     type: "function",
-    constant: true,
   },
   {
     inputs: [
       {
         internalType: "uint256",
-        name: "_id",
+        name: "nft_id",
         type: "uint256",
       },
       {
         internalType: "uint256",
-        name: "token_kind",
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "tk_id",
         type: "uint256",
       },
     ],
-    name: "sell",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "nonpayable",
+    name: "mint",
+    outputs: [],
+    stateMutability: "payable",
     type: "function",
   },
   {
     inputs: [
       {
         internalType: "uint256",
-        name: "_id",
+        name: "price",
         type: "uint256",
       },
     ],
-    name: "cancelSell",
+    name: "buy_fee",
     outputs: [
       {
-        internalType: "bool",
+        internalType: "uint256",
         name: "",
-        type: "bool",
+        type: "uint256",
       },
     ],
-    stateMutability: "nonpayable",
+    stateMutability: "pure",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "price",
+        type: "uint256",
+      },
+    ],
+    name: "loyalty",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "pure",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "from",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "nft_id",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "tk_id",
+        type: "uint256",
+      },
+    ],
+    name: "buy",
+    outputs: [],
+    stateMutability: "payable",
     type: "function",
   },
 ];
