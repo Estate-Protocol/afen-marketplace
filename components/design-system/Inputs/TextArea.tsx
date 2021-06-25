@@ -2,10 +2,10 @@ import React, { ReactNode } from "react";
 import Text from "@/design-system/Text";
 import { slugifyText } from "utils/misc";
 
-interface TextInput {
+interface TextAreaProps {
   label: string;
   description?: string;
-  type?: "text" | "number" | "email" | "password" | "search" | "tel";
+  rows?: number;
   value?: string | number;
   disabled?: boolean;
   icon?: ReactNode;
@@ -13,28 +13,22 @@ interface TextInput {
   required?: boolean;
   min?: number;
   max?: number;
-  error?: string;
   prepend?: ReactNode | string;
   onChange?: (text: any) => void;
 }
 
-export default function TextInput({
+export default function TextArea({
   label,
   value,
   icon,
-  type = "text",
+  rows,
   placeholder,
   description,
   required,
   disabled,
-  min,
-  max,
   prepend,
-  error,
   onChange,
-}: TextInput) {
-  const borderColor = [error ? "border-red-500" : "dark:border-gray-500"];
-
+}: TextAreaProps) {
   return (
     <div className="mb-5 w-full">
       <label htmlFor={slugifyText(label)}>
@@ -43,19 +37,15 @@ export default function TextInput({
           {required && <span className="text-black dark:text-white"> *</span>}
         </Text>
       </label>
-      <div
-        className={`inline-flex items-center w-full mt-2 border-2 ${borderColor} rounded-full px-4 py-2 focus:border-blue-500`}
-      >
+      <div className="inline-flex items-center w-full mt-2 border-2 dark:border-gray-500 rounded-xl px-4 py-2 focus:border-blue-500">
         {icon}
-        <input
+        <textarea
           name={slugifyText(label)}
           value={value}
-          type={type}
+          rows={rows || 4}
           disabled={disabled}
           placeholder={placeholder}
           required={required}
-          min={min}
-          max={max}
           className={`py-1 dark:bg-afen-blue focus:outline-none w-full ${
             disabled ? "text-gray-600" : "dark:text-gray-300"
           }`}
@@ -63,9 +53,9 @@ export default function TextInput({
         />
         <div className="ml-2">{prepend}</div>
       </div>
-      {(error || description) && (
+      {description && (
         <Text sub size="x-small" style="mt-2">
-          {error || description}
+          {description}
         </Text>
       )}
     </div>

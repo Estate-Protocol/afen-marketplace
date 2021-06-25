@@ -1,7 +1,6 @@
 import Container from "@/design-system/Container";
 import arts from "../data";
-import TabsComponent from "@/design-system/Tab";
-import ListingSectionHeader from "@/design-system/ListingSectionHeader";
+import Title from "@/design-system/Title";
 import HomeListingGrid from "@/pages/Home";
 
 export default function Home() {
@@ -30,7 +29,7 @@ export default function Home() {
       </div> */}
 
       <div className="mb-10">
-        <ListingSectionHeader title="Explore" />
+        <Title>Explore</Title>
         <HomeListingGrid data={arts} />
         {/* <TabsComponent
           tabs={[

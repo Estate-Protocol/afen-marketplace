@@ -24,8 +24,21 @@ export const slugifyText = (text: string) => {
   });
 };
 
-export const isMobile = () => {};
-
 export const parseUrl = (url: string) => {
   return url.replace(/^(?:https?:\/\/)?(?:www\.)?(mailto:)?(tel:)?/i, "");
+};
+
+export const getDevice = () => {
+  const { platform } = navigator;
+  if (/iPad|iPhone|iPod/.test(platform)) {
+    return "ios";
+  }
+  if (/Android/.test(navigator.platform)) {
+    return "android";
+  }
+};
+
+export const isMobile = () => {
+  const device = getDevice();
+  return device === "ios" || device === "android";
 };

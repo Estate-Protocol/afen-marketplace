@@ -6,6 +6,11 @@ import { IAssetData } from "utils/types";
 import { User as UserData } from "./types/User";
 import { getUser } from "./api";
 
+interface SavedUser {
+  address: string;
+  user?: UserData;
+}
+
 export interface UserDetails {
   user?: UserData | null;
   balance: number;
@@ -54,6 +59,27 @@ export const UserProvider: React.FC = ({ children }) => {
     null
   );
 
+  React.useEffect(() => {
+    const retrievedUser = localStorage.getItem("user");
+    if (retrievedUser) {
+      // @ts-ignore
+      window.ethereum
+        .request({
+          method: "eth_requestAccounts",
+        })
+        .then(() => {
+          setProvider(new ethers.providers.Web3Provider(window["ethereum"]));
+        });
+      const savedUser: SavedUser = JSON.parse(retrievedUser);
+
+      if (savedUser.address) {
+        setUser(savedUser.user);
+        setAddress(savedUser.address);
+        getBalance();
+      }
+    }
+  }, []);
+
   const resetApp = () => {
     setAddress(null);
     setBalance(null);
@@ -79,6 +105,7 @@ export const UserProvider: React.FC = ({ children }) => {
   const disconnectWallet = () => {
     setAddress(null);
     setBalance(0);
+    localStorage.removeItem("user");
   };
 
   const connectWallet = async () => {
@@ -96,41 +123,42 @@ export const UserProvider: React.FC = ({ children }) => {
       await requestPermissions();
       await getAccount();
     } catch (err) {
-      window.alert("You need to allow MetaMask.");
+      window.alert("Please install MetaMask, to connect your wallet.");
     }
   };
-  
+
   const getAccount = async () => {
     // @ts-ignore
     const accounts = await window.ethereum.request({
       method: "eth_requestAccounts",
     });
+
     // @ts-ignore
-    const bscChange = await window.ethereum.request({
+    await window.ethereum.request({
       method: "wallet_addEthereumChain",
       params: [
-        // {
-        //   chainId: '0x38',
-        //   chainName: 'BSC Mainnet',
-        //   nativeCurrency: {
-        //       name: 'BSCMainnet',
-        //       symbol: 'BNB',
-        //       decimals: 18
-        //   },
-        //   rpcUrls: ['https://bsc-dataseed.binance.org'],
-        //   blockExplorerUrls: ['https://bscscan.com']
-        // }
         {
-          chainId: "0x61",
-          chainName: "BSC Testnet",
+          chainId: "0x38",
+          chainName: "BSC Mainnet",
           nativeCurrency: {
-            name: "BSCTestnet",
+            name: "BSCMainnet",
             symbol: "BNB",
             decimals: 18,
           },
-          rpcUrls: ["https://data-seed-prebsc-1-s1.binance.org:8545/"],
-          blockExplorerUrls: ["https://testnet.bscscan.com"],
+          rpcUrls: ["https://bsc-dataseed.binance.org"],
+          blockExplorerUrls: ["https://bscscan.com"],
         },
+        // {
+        //   chainId: "0x61",
+        //   chainName: "BSC Testnet",
+        //   nativeCurrency: {
+        //     name: "BSCTestnet",
+        //     symbol: "BNB",
+        //     decimals: 18,
+        //   },
+        //   rpcUrls: ["https://data-seed-prebsc-1-s1.binance.org:8545/"],
+        //   blockExplorerUrls: ["https://testnet.bscscan.com"],
+        // },
       ],
     });
 
@@ -142,6 +170,13 @@ export const UserProvider: React.FC = ({ children }) => {
     if (address) {
       const user = await getUser(address);
       setUser(user);
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          address,
+          user,
+        })
+      );
     }
 
     return await getBalance();

@@ -22,20 +22,18 @@ export default function Create() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<CreateFormResponse | null>(null);
 
-  // const getContractPrice = (value: number) => {
-  //   return value * Math.pow(10, 18);
-  // };
+  setAbi(AFEN_NFT_ABI);
 
   const createNFT = async (data: CreateFormInput) => {
     setLoading(true);
-    await setAbi(AFEN_NFT_ABI);
     const nftContract = contractSigned as AfenNft;
 
     let formData = new FormData();
     formData.append("file", data.upload);
     formData.append("title", data.title);
+    formData.append("royalty", data.royalty.toString());
     formData.append("description", data.description);
-    formData.append("price", data.price.toString());
+    formData.append("price", data.afenPrice.toString());
     formData.append("userId", user.user._id);
 
     try {
@@ -52,8 +50,8 @@ export default function Create() {
           status: "success",
         });
 
-        const priceA = BigNumber.from(0);
-        const priceB = BigNumber.from(0);
+        const priceA = BigNumber.from(data.afenPrice);
+        const priceB = BigNumber.from(data.bnbPrice);
 
         const value = await nftContract.create_nft(
           response.data.nft.fileHash,
@@ -79,6 +77,7 @@ export default function Create() {
     }
     setLoading(false);
   };
+
   return user.address ? (
     <CreateForm
       onSubmit={createNFT}

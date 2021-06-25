@@ -18,10 +18,10 @@ export const userLinks = [
     label: "Create",
     href: "/create",
   },
-  {
-    label: "My items",
-    href: "/",
-  },
+  // {
+  //   label: "My items",
+  //   href: "/",
+  // },
   {
     label: "My profile",
     href: "/profile",
@@ -30,15 +30,15 @@ export const userLinks = [
 
 export const userLinksMobile = [
   {
-    label: "My items",
-    href: "/",
+    label: "Create",
+    href: "/create",
   },
+  // {
+  //   label: "My items",
+  //   href: "/",
+  // },
   {
     label: "My profile",
     href: "/profile",
-  },
-  {
-    label: "Disconnect",
-    href: "/",
   },
 ];

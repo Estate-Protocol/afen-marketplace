@@ -54,7 +54,7 @@ export default function UserDropdownMenu({
               leaveTo="opacity-0 translate-y-1"
             >
               <Popover.Panel className="absolute z-10 w-82 max-w-sm px-4 mt-2 transform right-0 sm:px-0 lg:max-w-3x">
-                <div className="overflow-hidden rounded-md py-2 bg-white dark:bg-afen-blue shadow-xl ring-1 ring-black ring-opacity-5 overflow-ellipsis">
+                <div className="overflow-hidden rounded-b-xl py-2 bg-white dark:bg-afen-blue shadow-xl ring-1 ring-black ring-opacity-5 overflow-ellipsis">
                   <div className="px-5 py-4 border-b dark:border-gray-700">
                     <Text sub size="x-small">
                       Wallet

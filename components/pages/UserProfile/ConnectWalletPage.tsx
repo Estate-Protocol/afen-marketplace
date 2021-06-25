@@ -7,9 +7,17 @@ import { BsArrowRight } from "react-icons/bs";
 import Flex from "@/components/design-system/Flex";
 import useUser from "hooks/useUser";
 import Image from "next/image";
+import { isMobile } from "utils/misc";
+import { getUser } from "@/components/User/api";
 
 export default function ConnectWalletPage() {
-  const { user, connectWallet } = useUser();
+  const { user, connectWallet, mobileWalletConnect } = useUser();
+
+  const handleMobileConnection = async () => {
+    mobileWalletConnect.walletConnectInit().then(async () => {
+      await getUser(user.address);
+    });
+  };
 
   return (
     <Container page style="md:w-2/3 lg:w-2/5 mx-auto">
@@ -34,7 +42,12 @@ export default function ConnectWalletPage() {
           </a>
         </Text>
         <div className="mt-8">
-          <Button size="large" onClick={connectWallet}>
+          <Button
+            size="large"
+            onClick={() =>
+              isMobile() ? handleMobileConnection() : connectWallet()
+            }
+          >
             <Flex>
               <Text>Connect Wallet</Text>
               <BsArrowRight className="ml-2 text-xl md:text-2xl" />

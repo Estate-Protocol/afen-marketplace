@@ -8,15 +8,13 @@ import Button from "@/design-system/Button";
 import Image from "next/image";
 import { User } from "@/components/User/types/User";
 import { CreateFormResponse } from "pages/create";
-import { BsArrowRight } from "react-icons/bs";
-// import { AiOutlinePlus, AiOutlineDelete } from "react-icons/ai";
+import TextArea from "@/components/design-system/Inputs/TextArea";
 // import MenuDropdown from "@/design-system/MenuDropdown";
 
 export interface CreateFormInput {
-  price: number;
   upload: File | null;
-  bnb: boolean;
-  afen: boolean;
+  bnbPrice: number;
+  afenPrice: number;
   minimumBid?: number;
   startDate?: string;
   endDate?: string;
@@ -36,21 +34,9 @@ interface IProps {
   onSubmit: (data: CreateFormInput) => void;
 }
 
-interface IState {
-  price: number;
-  upload: File | null;
-  afen: boolean;
-  bnb: boolean;
-  minimumBid?: number;
-  startDate: string;
-  endDate: string;
-  title: string;
-  description?: string;
-  royalty?: number;
-  properties?: {
-    [key: string]: string;
-  }[];
+interface IState extends CreateFormInput {
   previewImage: string | null;
+  errors?: { [key: string]: string | null };
 }
 
 enum NFTProperties {
@@ -65,10 +51,9 @@ export default class CreateForm extends Component<IProps, IState> {
     super(props);
 
     this.state = {
-      price: 0,
       upload: null,
-      bnb: false,
-      afen: true,
+      bnbPrice: 0,
+      afenPrice: 0,
       minimumBid: 0,
       startDate: "",
       endDate: "",
@@ -78,14 +63,6 @@ export default class CreateForm extends Component<IProps, IState> {
       previewImage: null,
     };
   }
-
-  handlePriceSelection = () => {
-    this.setState({ bnb: !this.state.bnb, afen: !this.state.afen });
-  };
-
-  handlePriceValue = (data: number) => {
-    this.setState({ price: data });
-  };
 
   onAddProperty = (property: string) => {
     if (this.state.properties.length < 5) {
@@ -124,7 +101,8 @@ export default class CreateForm extends Component<IProps, IState> {
     return (
       this.state.upload &&
       this.state.title.length > 0 &&
-      this.state.price !== null &&
+      this.state.afenPrice >= 0 &&
+      this.state.bnbPrice >= 0 &&
       this.state.royalty < 100
     );
   };
@@ -140,6 +118,29 @@ export default class CreateForm extends Component<IProps, IState> {
     }
   };
 
+  handleRoyaltyInput = (data: string) => {
+    const value = parseFloat(data);
+    if (value > 100) {
+      this.setState({
+        errors: {
+          ...this.state.errors,
+          royalty: "Your royalty cannot be greater 100% 😅",
+        },
+      });
+    } else {
+      this.setState({
+        errors: {
+          ...this.state.errors,
+          royalty: null,
+        },
+      });
+    }
+
+    this.setState({
+      royalty: parseFloat(data),
+    });
+  };
+
   handleSubmit = (e) => {
     e.preventDefault();
     if (this.canSubmit()) {
@@ -149,9 +150,9 @@ export default class CreateForm extends Component<IProps, IState> {
 
   render() {
     return (
-      <Container page style="mt-10 w-full md:mt-20 h-full">
+      <Container page style="mt-10 w-full md:mt-20 h-full md:w-10/12 xl:w-2/3">
         <Flex start>
-          <div className="lg:pr-10 w-full lg:w-2/3">
+          <div className="lg:pr-10 w-full md:w-1/2 lg:w-3/5">
             <Title>Create NFT</Title>
             <Text sub style="md:w-3/4">
               You can set how you want your NFT sold in two formats, by setting
@@ -161,21 +162,17 @@ export default class CreateForm extends Component<IProps, IState> {
 
             <form onSubmit={this.handleSubmit}>
               <div className="mt-10">
-                <div className="md:grid md:grid-cols-3 md:gap-6">
-                  <div className="md:col-span-1">
-                    <div className="px-4 sm:px-0">
-                      <h3 className="text-lg font-medium leading-6">Art</h3>
-                      <p className="mt-1 text-sm text-gray-600">
-                        Upload the art you would want to list.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="mt-5 md:mt-0 md:col-span-2 mb-0 sm:mb-10">
+                <div>
+                  <Text bold size="small">
+                    Image
+                    <span className="text-black dark:text-white"> *</span>
+                  </Text>
+                  <div className="mt-5 lg:col-span-2 mb-0 sm:mb-10">
                     <div className="sm:overflow-hidden">
-                      <div className="px-4 space-y-6 sm:pb-6">
+                      <div className="space-y-6 sm:pb-6">
                         <div>
                           <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-                            <div className="space-y-1 text-center">
+                            <div className="text-center">
                               <svg
                                 className="mx-auto h-12 w-12 text-gray-400"
                                 stroke="currentColor"
@@ -190,12 +187,20 @@ export default class CreateForm extends Component<IProps, IState> {
                                   strokeLinejoin="round"
                                 />
                               </svg>
-                              <div className="text-center text-sm text-gray-600">
+                              <div className="text-center mt-2 text-gray-600">
                                 <label
                                   htmlFor="file-upload"
-                                  className="relative cursor-pointer bg-gray-100 dark:bg-white rounded-md font-medium focus:outline-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-afen-yellow"
+                                  className={`relative cursor-pointer px-5 py-2 mb-2 rounded-full font-medium focus:outline-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-afen-yellow ${
+                                    this.state.upload
+                                      ? "bg-green-500 text-white"
+                                      : "bg-gray-100 dark:bg-white"
+                                  }`}
                                 >
-                                  <span className="px-2">Upload a file</span>
+                                  <span className="px-2">
+                                    {this.state.upload
+                                      ? "File Uploaded"
+                                      : "Upload a file"}
+                                  </span>
                                   <input
                                     id="file-upload"
                                     name="fileUpload"
@@ -206,7 +211,7 @@ export default class CreateForm extends Component<IProps, IState> {
                                   />
                                 </label>
                               </div>
-                              <p className="text-xs text-gray-500">
+                              <p className="text-xs text-gray-500 mt-4">
                                 PNG, JPG, GIF only up to 10MB
                               </p>
                             </div>
@@ -219,109 +224,60 @@ export default class CreateForm extends Component<IProps, IState> {
               </div>
 
               <div className="mt-10 sm:mt-0">
-                <div className="md:grid md:grid-cols-3 md:gap-6">
-                  <div className="md:col-span-1">
-                    <div className="px-4 sm:px-0">
-                      <h3 className="text-lg font-medium leading-6 text-white">
-                        Price
-                      </h3>
-                      <p className="mt-1 text-sm text-gray-600">
-                        We support listing your NFT either as BNB or AFEN.
-                        Minimum value is 0
-                      </p>
-                    </div>
-                  </div>
-                  <div className="mt-5 md:mt-0 md:col-span-2 mb-0 sm:mb-10">
+                <div>
+                  <div className="mt-2 lg:col-span-2 mb-0 sm:mb-5">
                     <div className="overflow-hidden">
-                      <div className="px-4 sm:pb-6">
+                      <div className=" sm:pb-6">
                         <div className="grid grid-cols-12 gap-6">
                           <div className="col-span-6">
-                            <div
-                              className={`pb-4 group border-b-2 border-gray-500 mb-1 cursor-pointer h-20 ${
-                                this.state.afen
-                                  ? "border-b-2 border-afen-yellow"
-                                  : ""
-                              }`}
-                              onClick={this.handlePriceSelection}
-                            >
-                              <Flex style="mb-2">
+                            <TextInput
+                              label="AFEN Price"
+                              min={0}
+                              required
+                              value={this.state.afenPrice}
+                              type="number"
+                              placeholder="0.00"
+                              prepend={
                                 <Image src="/logo.png" width="30" height="30" />
-                                <Text style={`text-lg ml-2`}>AFEN</Text>
-                              </Flex>
-                              <Text sub size="x-small" style="md:w-3/4">
-                                Your NFT price will be listed using the AFEN
-                                token.
-                              </Text>
-                            </div>
+                              }
+                              onChange={(data) =>
+                                this.setState({ afenPrice: data })
+                              }
+                            />
                           </div>
 
                           <div className="col-span-6">
-                            <div
-                              className={`pb-4 group border-b-2 border-gray-500 mb-1 cursor-pointer h-20 ${
-                                this.state.bnb
-                                  ? "border-b-2 border-afen-yellow"
-                                  : ""
-                              }`}
-                              onClick={this.handlePriceSelection}
-                            >
-                              <Flex style="mb-2">
+                            <TextInput
+                              label="BNB Price"
+                              min={0}
+                              required
+                              value={this.state.bnbPrice}
+                              type="number"
+                              placeholder="0.00"
+                              prepend={
                                 <Image
                                   src="/images/bnb.png"
                                   width="30"
                                   height="30"
                                 />
-                                <Text style={`text-lg ml-2`}>BNB</Text>
-                              </Flex>
-                              <Text sub size="x-small" style="md:w-3/4">
-                                Your NFT price will be listed using BNB.
-                              </Text>
-                            </div>
-                          </div>
-
-                          <div className="col-span-full">
-                            <TextInput
-                              label={"Price"}
-                              min={0}
-                              value={this.state.price}
-                              type="number"
-                              placeholder="0.00"
-                              prepend={
-                                this.state.bnb ? (
-                                  <>
-                                    <Image
-                                      src="/images/bnb.png"
-                                      width="30"
-                                      height="30"
-                                    />
-                                  </>
-                                ) : (
-                                  <>
-                                    <Image
-                                      src="/logo.png"
-                                      width="30"
-                                      height="30"
-                                    />
-                                  </>
-                                )
                               }
-                              onChange={(e) => this.handlePriceValue(e)}
+                              onChange={(data) =>
+                                this.setState({ bnbPrice: data })
+                              }
                             />
                           </div>
-
                           <div className="col-span-full">
                             <TextInput
                               label={"Royalty"}
                               min={0}
                               max={100}
+                              required
+                              error={this.state.errors?.royalty}
                               value={this.state.royalty}
                               type="number"
-                              placeholder="%"
                               description="Percentage paid to you as the creator anytime any a transation is made on this art (Post Sale)"
-                              onChange={(data) =>
-                                this.setState({
-                                  royalty: parseFloat(data),
-                                })
-                              }
+                              prepend={"%"}
+                              onChange={this.handleRoyaltyInput}
                             />
                           </div>
                         </div>
@@ -331,21 +287,11 @@ export default class CreateForm extends Component<IProps, IState> {
                 </div>
               </div>
 
-              <div className="mt-10 sm:mt-0">
-                <div className="md:grid md:grid-cols-3 md:gap-6">
-                  <div className="md:col-span-1">
-                    <div className="px-4 sm:px-0">
-                      <h3 className="text-lg font-medium leading-6 text-white">
-                        Details
-                      </h3>
-                      <p className="mt-1 text-sm text-gray-600">
-                        Name your art and if you like a description.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="mt-5 md:mt-0 md:col-span-2 mb-10">
+              <div className="mt-5 sm:mt-0">
+                <div>
+                  <div className="mt-2 lg:col-span-2">
                     <div className="overflow-hidden">
-                      <div className="pb-5 px-4 space-y-6 sm:pb-6">
+                      <div className="pb-5 space-y-6 lg:pb-6">
                         <div className="col-span-full">
                           <TextInput
                             label={"Title"}
@@ -358,10 +304,9 @@ export default class CreateForm extends Component<IProps, IState> {
                         </div>
 
                         <div className="col-span-full">
-                          <TextInput
+                          <TextArea
                             label={"Description"}
                             value={this.state.description}
-                            type="text"
                             required
                             onChange={(data) =>
                               this.setState({ description: data })
@@ -434,48 +379,29 @@ export default class CreateForm extends Component<IProps, IState> {
                   </div>
                 </div>
 
-                <Flex style="mb-10">
+                <Flex style="mb-2 lg:mb-10">
                   <Button
+                    loading={this.props.loading}
                     type="primary"
+                    block
                     size="large"
-                    style="ml-auto mt-4 inline-flex items-center"
                     inputType="submit"
                     disabled={!this.canSubmit()}
                   >
-                    {this.props.message?.status === "success" ? (
-                      <>
-                        {this.props.message?.text}
-                        {/* <BsArrowRight className="ml-2 text-xl md:text-2xl" /> */}
-                      </>
-                    ) : (
-                      "Create"
-                    )}
-                    {this.props.loading && (
-                      <svg
-                        className={`ml-2 spinner stroke-current h-5 w-5 text-white`}
-                        viewBox="0 0 50 50"
-                      >
-                        <circle
-                          className="path"
-                          cx="25"
-                          cy="25"
-                          r="20"
-                          fill="none"
-                          strokeWidth="5"
-                        ></circle>
-                      </svg>
-                    )}
+                    {this.props.message?.status === "success"
+                      ? this.props.message?.text
+                      : "Create"}
                   </Button>
                 </Flex>
               </div>
             </form>
           </div>
-          <div className="hidden lg:block lg:w-1/3 lg:h-screen lg:min-h-screen overflow-hidden">
-            <div className="relative h-2/3 w-full bg-gray-50 dark:bg-gray-500 p-16">
+          <div className="hidden md:block md:w-1/2 lg:w-2/5 lg:min-h-screen overflow-hidden md:pl-5 lg:pl-0">
+            <div className="relative h-2/3 w-full border-2 dark:border-gray-500 rounded-xl md:p-8 lg:p-16">
               {this.state.previewImage ? (
                 <img
                   src={this.state.previewImage}
-                  className="h-full w-full object-cover shadow-xl"
+                  className="h-full w-full object-cover shadow-2xl"
                 />
               ) : (
                 <Flex col center>
@@ -489,17 +415,17 @@ export default class CreateForm extends Component<IProps, IState> {
               )}
             </div>
             <div className="mx-5 mt-2">
-              <Flex spaceBetween wrap style="items-start mb-4 flex-nowrap">
-                <div>
-                  <Title style="text-2xl md:text-3xl font-semibold">
+              <Flex spaceBetween wrap style="mb-4">
+                <div className="">
+                  <Title style="text-2xl md:text-3xl font-semibold truncate w-64 overflow-ellipsis overflow-hidden">
                     {this.state?.title || "---"}
                   </Title>
                   <div>
                     <div className="flex items-center mt-1 cursor-pointer">
-                      <div className="overflow-hidden rounded-full mr-1 bg-gray-100 dark:bg-gray-500">
+                      <div className="overflow-hidden rounded-full mr-1">
                         {this.props.user?.avatar && (
                           <Image
-                            src={this.props.user?.avatar}
+                            src={this.props.user?.avatar || "/logo.png"}
                             layout="fixed"
                             width="30"
                             height="30"
@@ -509,7 +435,7 @@ export default class CreateForm extends Component<IProps, IState> {
                         )}
                       </div>
                       <Text
-                        textWidth="w-60"
+                        textWidth="max-w-60"
                         truncate
                         style="text-gray-500 ml-1"
                       >
@@ -518,13 +444,12 @@ export default class CreateForm extends Component<IProps, IState> {
                     </div>
                   </div>
                 </div>
-                <div className="my-4">
+                <div>
                   <Text bold sub size="x-small" style="text-right">
                     Price
                   </Text>
                   <Text style="text-xl">
-                    {this.state?.price.toString()}{" "}
-                    {this.state.bnb ? "BNB" : "AFEN"}
+                    {this.state?.afenPrice.toString()} AFEN
                   </Text>
                 </div>
               </Flex>

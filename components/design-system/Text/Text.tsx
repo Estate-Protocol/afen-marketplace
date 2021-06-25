@@ -19,6 +19,7 @@ export default function Text({
   size = "default",
   truncate,
   textWidth,
+  onClick,
 }: TextProps) {
   const getTextSize = () => {
     switch (size) {
@@ -43,6 +44,7 @@ export default function Text({
       ${bold ? "font-semibold" : ""}
       `}
       style={truncate && { lineClamp: 3, boxOrient: "vertical" }}
+      onClick={onClick}
     >
       {children}
     </p>

@@ -27,12 +27,10 @@ export const Layout: React.FC = (props: BaseComponent) => {
           crossOrigin=""
         />
       </Head>
-
-      {/* TODO: isAuthenticated */}
       <Header {...props} />
-
       <div className="px-1 flex flex-col justify-center align-middle min-h-screen dark:bg-afen-blue">
         {/* Body */}
+        {/* Notification */}
         <main className="h-min-screen font-medium tracking-tight">
           <div>{props.children}</div>
         </main>

@@ -1,5 +1,6 @@
 import React from "react";
 import { BaseComponent } from "@/types/BaseComponent";
+import Loader from "react-loader-spinner";
 
 enum ButtonType {
   PRIMARY = "primary",
@@ -47,11 +48,12 @@ export default function Button({
   icon,
   block,
   disabled,
+  loading,
   onClick,
   onFocus,
 }: ButtonProps) {
   const getButtonStyle = (): string => {
-    const defaultStyle = "font-semibold focus:outline-none";
+    const defaultStyle = "font-semibold focus:outline-none text-center";
 
     let buttonStyle = "text-md ";
     let buttonSize = "";
@@ -79,7 +81,7 @@ export default function Button({
 
     switch (size) {
       case "large":
-        buttonSize += "text-lg px-10";
+        buttonSize += "px-10";
         break;
       case "medium":
         buttonSize += "text-md";
@@ -95,7 +97,7 @@ export default function Button({
       icon ? "inline-flex items-center justify-between" : ""
     } ${block ? "w-full py-4" : ""} ${
       disabled
-        ? "text-gray-500 bg-opacity-80 hover:text-gray-500 cursor-default"
+        ? "text-gray-500 bg-black text-white hover:text-gray-500 cursor-default"
         : ""
     }
     ${buttonSize}
@@ -105,11 +107,16 @@ export default function Button({
   return (
     <button
       className={getButtonStyle()}
-      onClick={onClick}
+      onClick={disabled ? undefined : onClick}
       onFocus={onFocus}
       type={inputType}
     >
       {children}
+      {loading && (
+        <span className="ml-2">
+          <Loader type="Oval" color="#ffffff" height={20} width={20} />
+        </span>
+      )}
     </button>
   );
 }
